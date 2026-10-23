@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dutchman CAD</title>
+<meta name="description" content="Open CAD tools: moving designs between programs, testing that they come through right, and helping more people and tools work with them.">
+<style>
+:root{--bg:#f6f7f5;--card:#fff;--ink:#16201c;--muted:#5b6762;--line:#dde3df;--teal:#2f6b5c;--amber:#c08a2e}
+@media (prefers-color-scheme:dark){:root{--bg:#121816;--card:#1a221f;--ink:#e6ece9;--muted:#9aa8a2;--line:#2b3631;--teal:#6fb7a2;--amber:#e0ad55}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:860px;margin:0 auto;padding:40px 16px 64px}
+header .brand{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+header .brand a{color:inherit;text-decoration:none}
+h1{font-size:34px;line-height:1.2;margin:6px 0 12px}
+h2{font-size:20px;margin:40px 0 12px}
+p{margin:0 0 12px}
+a{color:var(--teal)}
+.lead{font-size:18px;color:var(--muted)}
+.cta{display:inline-block;margin:16px 12px 0 0;padding:10px 18px;border-radius:8px;background:var(--teal);color:#fff;text-decoration:none;font-weight:600}
+.cta.alt{background:transparent;color:var(--teal);border:1px solid var(--teal)}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:8px}
+.step{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px}
+.step .n{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--amber);color:#1b1408;font-weight:700;margin-bottom:8px}
+.step h3{margin:0 0 6px;font-size:16px}
+.step p{color:var(--muted);font-size:15px;margin:0}
+ul{padding-left:20px;margin:0}
+li{margin:0 0 8px}
+.apps{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 12px}
+.app{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:4px 12px;font-size:14px}
+footer{margin-top:48px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+.proj{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px;margin:0 0 14px}.proj h3{margin:0 0 4px;font-size:18px}.proj .st{font-size:13px;color:var(--amber);font-weight:600;margin-bottom:6px}.proj p{color:var(--muted);margin:0 0 8px}.proj a.more{font-weight:600}</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="brand">Dutchman CAD</div>
+  <h1>Open CAD tools</h1>
+  <p class="lead">For people who design with CAD and don't want their work locked inside one program. Dutchman CAD is a home for open tools: moving designs between programs, testing that they come through right, and helping more people and tools work with them. Much of it is built around <a href="https://github.com/tangency-labs/solidcraft">SolidCraft</a>, the open-source parametric CAD app, but not all of it.</p>
+  <a class="cta" href="https://github.com/dutchman-cad/dutchman#download">Download Dutchman</a>
+  <a class="cta alt" href="https://github.com/dutchman-cad">GitHub</a>
+</header>
+
+<h2>Projects</h2>
+<div class="proj"><h3>Dutchman</h3><div class="st">Early development · Windows, macOS, and Linux</div>
+<p>Converts native CAD designs from Fusion, Inventor, SolidWorks, and FreeCAD into SolidCraft designs, keeping feature history, sketches, assemblies, and joints where it can. It also writes FreeCAD documents, and every conversion lists what it couldn't carry across.</p>
+<a class="more" href="https://github.com/dutchman-cad/dutchman">Dutchman on GitHub →</a></div>
+<div class="proj"><h3>Fixtures</h3><div class="st">Collecting · volunteers welcome</div>
+<p>Small, known test files made by volunteers in the real CAD programs, from short recipes, so the readers behind Dutchman can be checked against ground truth.</p>
+<a class="more" href="https://dutchman-cad.github.io/fixtures/">How to help →</a></div>
+<div class="proj"><h3>SolidCraft-Pilot</h3><div class="st">Coming soon</div>
+<p>Helps smaller, local language models drive SolidCraft reliably, from outside the app.</p></div>
+
+<h2>Principles</h2>
+<ul>
+  <li><strong>Clean room.</strong> Formats are worked out from files people are entitled to use and from public information, never from vendor SDKs, decompiled programs, or confidential material.</li>
+  <li><strong>Your files stay yours.</strong> Nothing is uploaded unless you choose to share it, and reports never need your file names or paths.</li>
+  <li><strong>Honest output.</strong> Every conversion lists what it could not carry across.</li>
+</ul>
+
+<h2>Get involved</h2>
+<ul>
+  <li>Try <a href="https://github.com/dutchman-cad/dutchman#download">Dutchman</a> on your own designs, and <a href="https://github.com/dutchman-cad/dutchman/issues/new/choose">report anything that doesn't convert</a>.</li>
+  <li>Make a few <a href="https://dutchman-cad.github.io/fixtures/">fixture files</a> in the CAD program you use.</li>
+</ul>
+
+<footer>Dutchman CAD · open CAD tools · <a href="https://github.com/dutchman-cad">github.com/dutchman-cad</a></footer>
+</main>
+</body>
+</html>
