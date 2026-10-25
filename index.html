@@ -41,6 +41,9 @@ a{color:var(--teal)}
 .step .n{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--amber);color:#1b1408;font-weight:700;margin-bottom:8px}
 .step h3{margin:0 0 6px;font-size:16px}
 .step p{color:var(--muted);font-size:15px;margin:0}
+.fmts{margin:0 0 12px;padding-left:20px;color:var(--muted);font-size:15px}
+.fmts li{margin:3px 0}
+.fmts strong{color:var(--ink);font-weight:600}
 ul{padding-left:20px;margin:0}
 li{margin:0 0 8px}
 .apps{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 12px}
@@ -54,7 +57,7 @@ footer{margin-top:48px;padding-top:16px;border-top:1px solid var(--line);color:v
   <div class="brand">Dutchman CAD</div>
   <h1>Open CAD tools</h1>
   <p class="lead">For people who design with CAD and don't want their work locked inside one program. Dutchman CAD is a home for open tools: moving designs between programs, testing that they come through right, and helping more people and tools work with them. Much of it is built around <a href="https://github.com/tangency-labs/solidcraft">SolidCraft</a>, the open-source parametric CAD app, but not all of it.</p>
-  <a class="cta" href="https://github.com/dutchman-cad/dutchman#download">Download Dutchman Convert</a>
+  <a class="cta" href="https://github.com/dutchman-cad/dutchman#download">Download Dutchman Convert 0.2.0</a>
   <a class="cta alt" href="https://github.com/dutchman-cad">GitHub</a>
   <a class="cta alt" href="https://discord.gg/yTcseBEdeu">Discord</a>
 </header>
@@ -74,8 +77,16 @@ footer{margin-top:48px;padding-top:16px;border-top:1px solid var(--line);color:v
 <!-- glance:end -->
 
 <h2>Projects</h2>
-<div class="proj"><h3>Dutchman Convert</h3><div class="st">Early development · Windows, macOS, and Linux</div>
-<p>Converts native CAD designs from Fusion, Inventor, SolidWorks, and FreeCAD into SolidCraft designs, keeping feature history, sketches, assemblies, and joints where it can. It also writes FreeCAD documents, and every conversion lists what it couldn't carry across.</p>
+<div class="proj"><h3>Dutchman Convert</h3><div class="st">Version 0.2.0 · early development · Windows, macOS, and Linux</div>
+<p>Converts native CAD designs into SolidCraft designs, keeping feature history, sketches, assemblies, and joints where it can. It also writes FreeCAD documents, and every conversion lists what it couldn't carry across. It knows 12 formats:</p>
+<ul class="fmts">
+  <li><strong>Fusion</strong> (.f3d, .f3z) and <strong>FreeCAD</strong> (.FCStd): geometry, components, and feature history and joints when they map</li>
+  <li><strong>Inventor</strong> parts and assemblies (.ipt, .iam): geometry, placed parts, and feature history when every feature maps</li>
+  <li><strong>SolidWorks</strong> parts (.sldprt): geometry</li>
+  <li><strong>CATIA</strong> parts (.CATPart), <strong>Creo View</strong> (.pvz), <strong>Rhino</strong> (.3dm), <strong>ACIS</strong> (.sat, .sab, .smt, .smb), and <strong>STEP</strong> (.step, .stp): geometry, as solids and surfaces</li>
+  <li><strong>Creo</strong> and <strong>NX</strong> parts (.prt): recognised, but their geometry isn't read yet</li>
+  <li><strong>IGES</strong> (.igs, .iges): recognised; open these in SolidCraft directly (File › Import)</li>
+</ul>
 <a class="more" href="https://github.com/dutchman-cad/dutchman">Dutchman Convert on GitHub →</a></div>
 <div class="proj"><h3>Fixtures</h3><div class="st">Collecting · volunteers welcome</div>
 <p>Small, known test files made by volunteers in the real CAD programs, from short recipes, so the readers behind Dutchman Convert can be checked against ground truth.</p>
