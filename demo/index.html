@@ -1,12 +1,12 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Converted designs, live · Dutchman CAD</title>
-<meta name="description" content="Fusion designs converted by Dutchman Convert, open in SolidCraft right in your browser.">
+<meta name="description" content="A gallery of Fusion and FreeCAD designs converted by Dutchman Convert, ready to explore in SolidCraft.">
 <meta name="theme-color" content="#1f6f5c">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Dutchman CAD">
 <meta property="og:title" content="Converted designs, live in your browser">
-<meta property="og:description" content="A Fusion robot arm converted by Dutchman Convert, native in SolidCraft: 41 parts, joints you can drive, right in your browser.">
+<meta property="og:description" content="Explore a gallery of converted Fusion and FreeCAD designs: assemblies, joints, and editable feature history, live in SolidCraft.">
 <meta property="og:url" content="https://dutchman-cad.github.io/demo/">
 <meta property="og:image" content="https://dutchman-cad.github.io/demo/og.png">
 <meta property="og:image:width" content="1200">
@@ -15,37 +15,28 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://dutchman-cad.github.io/demo/og.png">
 
-<style>
-:root{--bg:#f6f7f5;--card:#fff;--ink:#16201c;--muted:#5b6762;--line:#dde3df;--teal:#2f6b5c}
-@media (prefers-color-scheme:dark){:root{--bg:#121816;--card:#1a221f;--ink:#e6ece9;--muted:#9aa8a2;--line:#2b3631;--teal:#6fb7a2}}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-main{max-width:1100px;margin:0 auto;padding:40px 16px 64px}
-.brand{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}.brand a{color:inherit;text-decoration:none}
-h1{font-size:32px;line-height:1.2;margin:6px 0 12px}h2{font-size:20px;margin:40px 0 8px}
-p{color:var(--muted);max-width:760px}a{color:var(--teal)}
-.frame{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--card)}
-iframe{display:block;width:100%;height:min(70vh,620px);border:0}
-.cta{display:inline-block;margin:12px 12px 0 0;padding:9px 16px;border-radius:8px;background:var(--teal);color:#fff;text-decoration:none;font-weight:600}
-.alt{background:transparent;color:var(--teal);border:1px solid var(--teal)}
-small{color:var(--muted)}
-</style></head><body><main>
+<link rel="stylesheet" href="gallery.css">
+</head><body><main>
 <div class="brand"><a href="../">Dutchman CAD</a> · demo</div>
 <h1>Converted designs, live in your browser</h1>
-<p>These Fusion designs were converted by <a href="https://github.com/dutchman-cad/dutchman">Dutchman Convert</a> into native SolidCraft files. Each one runs in SolidCraft's web app two ways: embedded in this page, or opened in the full app.</p>
-
-<h2>Robot arm: an assembly with joints you can drive</h2>
-<p>41 parts and 36 joints. In the full app, open Assemble &gt; Drive Joints and turn the base, swing the shoulder, or bend the elbow.</p>
-<div class="frame"><iframe title="Robot arm in SolidCraft" loading="lazy" src="app/?embed&amp;open=https://dutchman-cad.github.io/demo/designs/robot-arm.solidcraft"></iframe></div>
-<a class="cta" href="app/?open=https://dutchman-cad.github.io/demo/designs/robot-arm.solidcraft" target="_blank" rel="noopener">Open in SolidCraft</a>
-<a class="cta alt" href="designs/robot-arm.solidcraft" download>Download the design</a>
-<p><small>Robot arm: <a href="https://github.com/Adriaeik/fusion2URDF">Adriaeik/fusion2URDF</a> (MIT).</small></p>
-
-<h2>A part with its feature history</h2>
-<p>A sketch with its dimensions and constraints, an extrude, and a fillet. In the full app, double-click the extrude in the History bar, change 10 to 25, and the part rebuilds.</p>
-<div class="frame"><iframe title="Part with feature history in SolidCraft" loading="lazy" src="app/?embed&amp;open=https://dutchman-cad.github.io/demo/designs/history-block.solidcraft"></iframe></div>
-<a class="cta" href="app/?open=https://dutchman-cad.github.io/demo/designs/history-block.solidcraft" target="_blank" rel="noopener">Open in SolidCraft</a>
-<a class="cta alt" href="designs/history-block.solidcraft" download>Download the design</a>
-<p><small>Part: a public-domain (CC0) fixture.</small></p>
-
+<p>These Fusion and FreeCAD designs were converted by <a href="https://github.com/dutchman-cad/dutchman">Dutchman Convert</a> into native SolidCraft files. Explore assemblies and editable feature history in an embedded viewer, or open a design in the full app.</p>
+<p id="status" role="status">Loading the gallery…</p>
+<noscript><p>Enable JavaScript to load the gallery of converted designs.</p></noscript>
+<div id="gallery" class="gallery"></div>
 <p><small>SolidCraft's web app runs entirely in your browser; nothing is uploaded. It needs WebGPU or WebGL2. This page uses a preview build with linked designs and an embed view; the official app gets them once they land in SolidCraft.</small></p>
+<script>
+const node = (tag, text, cls) => { const el = document.createElement(tag); el.textContent = text; if (cls) el.className = cls; return el; };
+fetch('gallery.json').then(r => { if (!r.ok) throw new Error(); return r.json(); }).then(entries => {
+  for (const entry of entries) {
+    const card = node('article', '', 'card'), body = node('div', '', 'card-body');
+    const img = document.createElement('img'); img.src = '../' + entry.thumb; img.alt = entry.title + ' in SolidCraft'; img.width = 640; img.height = 400; img.loading = 'lazy';
+    const heading = node('h2', ''), link = node('a', entry.title); link.href = 'view.html?d=' + encodeURIComponent(entry.id); heading.append(link);
+    const credit = node('p', '', 'credit'), source = node('a', entry.credit.author); source.href = entry.credit.link;
+    credit.append(source, ' · ' + entry.credit.licence);
+    body.append(node('span', entry.source_app, 'badge'), heading, node('p', entry.what), node('p', entry.stats, 'stats'), credit);
+    card.append(img, body); document.getElementById('gallery').append(card);
+  }
+  document.getElementById('status').textContent = entries.length ? '' : 'More designs are coming soon.';
+}).catch(() => { document.getElementById('status').textContent = 'The gallery could not load. Please refresh to try again.'; });
+</script>
 </main></body></html>
