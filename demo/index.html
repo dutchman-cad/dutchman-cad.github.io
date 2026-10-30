@@ -33,7 +33,7 @@ fetch('gallery.json').then(r => { if (!r.ok) throw new Error(); return r.json();
     const heading = node('h2', ''), link = node('a', entry.title); link.href = 'view.html?d=' + encodeURIComponent(entry.id); heading.append(link);
     const credit = node('p', '', 'credit'), source = node('a', entry.credit.author); source.href = entry.credit.link;
     credit.append(source, ' · ' + entry.credit.licence);
-    body.append(node('span', entry.source_app, 'badge'), heading, node('p', entry.what), node('p', entry.stats, 'stats'), credit);
+    body.append(node('span', 'Converted from ' + entry.source_app, 'badge'), heading, node('p', entry.what), node('p', entry.stats, 'stats'), credit);
     card.append(img, body); document.getElementById('gallery').append(card);
   }
   document.getElementById('status').textContent = entries.length ? '' : 'More designs are coming soon.';
