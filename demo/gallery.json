@@ -38,7 +38,6 @@
     "what": "A complete 3D printer assembly of 1,683 parts, each body in the colour it has in the original.",
     "stats": "1,683 of 1,683 parts placed · every body in its own colour",
     "download": {
-      "url": "https://github.com/dutchman-cad/dutchman-cad.github.io/releases/download/designs-2026-10-30/voron-2-4r2.sc",
       "size": "245 MB"
     },
     "thumb": "demo/thumbs/voron-2-4.png",
@@ -49,7 +48,7 @@
       "link": "https://github.com/VoronDesign/Voron-2"
     },
     "notice": "Not affiliated with Voron Design. The converted file is a derivative of the Voron 2.4r2 CAD, licensed GPL-3.0; its source is the Voron 2.4r2 assembly in the linked repository.",
-    "hint": "Too large for the browser viewer: download it and open it in SolidCraft on your computer."
+    "hint": "Too large for the browser viewer. The download for SolidCraft on your computer is coming soon."
   },
   {
     "id": "history-block",
