@@ -4,8 +4,8 @@
     "title": "Robot arm",
     "source_app": "Fusion",
     "what": "An assembly with joints you can drive.",
-    "stats": "41 parts · 36 joints",
-    "design": "designs/robot-arm.solidcraft",
+    "stats": "41 parts · 39 joints",
+    "design": "designs/robot-arm.sc",
     "thumb": "demo/thumbs/robot-arm.png",
     "credit": {
       "author": "Adriaeik / fusion2URDF",
@@ -15,19 +15,56 @@
     "hint": "In the full app, open Assemble > Drive Joints and turn the base, swing the shoulder, or bend the elbow."
   },
   {
+    "id": "railcore",
+    "title": "RailCore II 300ZL",
+    "source_app": "Fusion",
+    "what": "A complete 3D printer: frame, motion system, and electronics enclosure, with every part where its designers placed it.",
+    "stats": "379 of 379 parts placed · 153 of 416 features editable · 19 parts fully editable",
+    "design": "designs/railcore.sc",
+    "thumb": "demo/thumbs/railcore.png",
+    "credit": {
+      "author": "RailCore® II 300ZL by J. Steve White and Tony Akens",
+      "licence": "CC BY 3.0",
+      "licence_link": "https://creativecommons.org/licenses/by/3.0/",
+      "link": "https://github.com/railcore/parts"
+    },
+    "notice": "Converted from the original Fusion design to SolidCraft by Dutchman Convert; the design itself is unchanged.",
+    "hint": "In the full app, step through the History bar: 153 features came through editable, with their sketches. The rest of each part is an imported solid."
+  },
+  {
+    "id": "voron-2-4",
+    "title": "Voron 2.4r2",
+    "source_app": "Fusion",
+    "what": "A complete 3D printer assembly of 1,683 parts, each body in the colour it has in the original.",
+    "stats": "1,683 of 1,683 parts placed · every body in its own colour",
+    "download": {
+      "url": "https://github.com/dutchman-cad/dutchman-cad.github.io/releases/download/designs-2026-10-30/voron-2-4r2.sc",
+      "size": "245 MB"
+    },
+    "thumb": "demo/thumbs/voron-2-4.png",
+    "credit": {
+      "author": "Voron 2.4r2 by Voron Design",
+      "licence": "GPL-3.0",
+      "licence_link": "https://www.gnu.org/licenses/gpl-3.0.html",
+      "link": "https://github.com/VoronDesign/Voron-2"
+    },
+    "notice": "Not affiliated with Voron Design. The converted file is a derivative of the Voron 2.4r2 CAD, licensed GPL-3.0; its source is the Voron 2.4r2 assembly in the linked repository.",
+    "hint": "Too large for the browser viewer: download it and open it in SolidCraft on your computer."
+  },
+  {
     "id": "history-block",
     "title": "A part with its feature history",
-    "source_app": "Fusion",
-    "what": "A sketch with its dimensions and constraints, an extrude, and a fillet.",
-    "stats": "3 editable history steps",
-    "design": "designs/history-block.solidcraft",
+    "source_app": "FreeCAD",
+    "what": "A sketch with its dimensions and constraints, a pad, and a fillet, with verified editable history.",
+    "stats": "3 editable history steps · verified",
+    "design": "designs/history-block.sc",
     "thumb": "demo/thumbs/history-block.png",
     "credit": {
-      "author": "Dutchman CAD fixtures",
+      "author": "Dutchman CAD fixtures · FreeCAD 1.1.4 / F03a",
       "licence": "CC0",
-      "link": "https://github.com/dutchman-cad/fixtures"
+      "link": "https://github.com/dutchman-cad/fixtures/blob/main/files/freecad/1.1.4/F03a.FCStd"
     },
-    "hint": "In the full app, double-click the extrude in the History bar, change 10 to 25, and the part rebuilds."
+    "hint": "In the full app, double-click the extrude in the History bar, change its length, and the part rebuilds. Geometry was verified against the source."
   },
   {
     "id": "counterbore-block",
@@ -35,14 +72,14 @@
     "source_app": "FreeCAD",
     "what": "Two sketches, a pad, and a counterbored hole, with verified editable history.",
     "stats": "4 editable history steps · verified",
-    "design": "designs/counterbore-block.solidcraft",
+    "design": "designs/counterbore-block.sc",
     "thumb": "demo/thumbs/counterbore-block.png",
     "credit": {
       "author": "Dutchman CAD fixtures · FreeCAD 1.1.4 / F04b",
       "licence": "CC0",
       "link": "https://github.com/dutchman-cad/fixtures/blob/main/files/freecad/1.1.4/F04b.FCStd"
     },
-    "hint": "In the full app, inspect Pad and Hole in the History bar. Geometry was verified against the source; one sketch symmetry constraint was omitted."
+    "hint": "In the full app, inspect Pad and Hole in the History bar. Geometry was verified against the source."
   },
   {
     "id": "raised-pad",
@@ -50,13 +87,13 @@
     "source_app": "FreeCAD",
     "what": "Two sketches and two additive extrudes, with verified editable history.",
     "stats": "4 editable history steps · verified",
-    "design": "designs/raised-pad.solidcraft",
+    "design": "designs/raised-pad.sc",
     "thumb": "demo/thumbs/raised-pad.png",
     "credit": {
       "author": "Dutchman CAD fixtures · FreeCAD 1.1.4 / F21a",
       "licence": "CC0",
       "link": "https://github.com/dutchman-cad/fixtures/blob/main/files/freecad/1.1.4/F21a.FCStd"
     },
-    "hint": "In the full app, inspect Pad and EmbossPad in the History bar. Geometry was verified against the source; one symmetry constraint per sketch was omitted and four parameters were renamed."
+    "hint": "In the full app, inspect Pad and EmbossPad in the History bar. Geometry was verified against the source; four parameters were renamed because their names repeat."
   }
 ]

@@ -23,7 +23,7 @@
 <p id="status" role="status">Loading the gallery…</p>
 <noscript><p>Enable JavaScript to load the gallery of converted designs.</p></noscript>
 <div id="gallery" class="gallery"></div>
-<p><small>SolidCraft's web app runs entirely in your browser; nothing is uploaded. It needs WebGPU or WebGL2. This page uses a preview build with linked designs and an embed view; the official app gets them once they land in SolidCraft.</small></p>
+<p><small>SolidCraft's web app runs entirely in your browser; nothing is uploaded. It needs WebGPU or WebGL2. This page uses SolidCraft 0.28.0's web app.</small></p>
 <script>
 const node = (tag, text, cls) => { const el = document.createElement(tag); el.textContent = text; if (cls) el.className = cls; return el; };
 fetch('gallery.json').then(r => { if (!r.ok) throw new Error(); return r.json(); }).then(entries => {

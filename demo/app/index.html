@@ -21,8 +21,8 @@
   <meta name="twitter:image:alt" content="SolidCraft: open-source parametric CAD built in Rust">
   
 <script type="module">
-import init, * as bindings from './solidcraft-web-a8b20140f3bf7ce4.js';
-const wasm = await init({ module_or_path: './solidcraft-web-a8b20140f3bf7ce4_bg.wasm' });
+import init, * as bindings from './solidcraft-web-b517fa56d6287dbf.js';
+const wasm = await init({ module_or_path: './solidcraft-web-b517fa56d6287dbf_bg.wasm' });
 
 
 window.wasmBindings = bindings;
@@ -33,18 +33,22 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
 </script>
   
   
+  
+  
+  
+  
   <link rel="stylesheet" href="./loading-fa23566dd89fa92b.css" integrity="sha384-euwKh4irKhe2/jloPXvLM24Jyb1hGwXpW8te2IFuClbPEShB7WM0y+ZiFiHMDnKJ"/>
   
   <!-- Installable as an app (manifest.webmanifest); the icons are the Linux exports of the app mark. -->
   <meta name="theme-color" content="#343840">
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="icon" type="image/png" sizes="32x32" href="icons/32x32/ai.storyteller.solidcraft.png">
-  <link rel="apple-touch-icon" href="icons/256x256/ai.storyteller.solidcraft.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/32x32/io.tangencylabs.solidcraft.png">
+  <link rel="apple-touch-icon" href="icons/256x256/io.tangencylabs.solidcraft.png">
   
   
   
   
-<link rel="modulepreload" href="./solidcraft-web-a8b20140f3bf7ce4.js" crossorigin="anonymous" integrity="sha384-MwALvJRWMDoWFA4jg8d9p1PmqwuFedxfHGgIcKm8pW6QlVkzA8iqf+5W0ogtCm8Z"><link rel="preload" href="./solidcraft-web-a8b20140f3bf7ce4_bg.wasm" crossorigin="anonymous" integrity="sha384-6M2mFPhfNARibEQvBqMpnUPHWlMoPavXlTnZTxz+UscdzPeWXvmc2SmsJhLn+GgW" as="fetch" type="application/wasm"></head>
+<link rel="modulepreload" href="./solidcraft-web-b517fa56d6287dbf.js" crossorigin="anonymous" integrity="sha384-FU8XmWjSUxVqkZDT2hD+qYKWoLKDMdBLbasisapuAb9HN/H565rnnl3U6eehNCoC"><link rel="preload" href="./solidcraft-web-b517fa56d6287dbf_bg.wasm" crossorigin="anonymous" integrity="sha384-cbpBYCJiPIgk2RJilpl8hwCbBfvdkxWf80jWyNvg782kc3vCtPnyAXJWkwOkxcJE" as="fetch" type="application/wasm"></head>
 <body>
   <canvas id="solidcraft_canvas"></canvas>
   <div id="solidcraft_loading" role="status"><img src="loading-logo.svg" alt=""><span class="sr-only">Loading SolidCraft&hellip;</span></div>

@@ -11,12 +11,12 @@
 <noscript><p>Enable JavaScript to load the design viewer, or <a href="./">return to the gallery</a>.</p></noscript>
 <section id="design" hidden>
 <h1 id="title"></h1><span id="source" class="badge"></span>
-<p id="what"></p><p id="stats" class="stats"></p><p id="credit" class="credit"></p>
-<div class="frame"><iframe id="viewer" title="Design in SolidCraft" allow="fullscreen" allowfullscreen></iframe></div>
+<p id="what"></p><p id="stats" class="stats"></p><p id="credit" class="credit"></p><p id="notice" class="credit" hidden></p>
+<div class="frame"><iframe id="viewer" title="Design in SolidCraft" allow="fullscreen" allowfullscreen></iframe><img id="still" alt="" width="640" height="400" hidden></div>
 <div class="actions"><a id="open" class="cta" target="_blank" rel="noopener">Open in SolidCraft</a><a id="download" class="cta alt" download>Download the design</a></div>
 <p id="hint" hidden></p>
 </section>
-<p><small>SolidCraft's web app runs entirely in your browser; nothing is uploaded. It needs WebGPU or WebGL2. This page uses a preview build with linked designs and an embed view; the official app gets them once they land in SolidCraft.</small></p>
+<p><small>SolidCraft's web app runs entirely in your browser; nothing is uploaded. It needs WebGPU or WebGL2. This page uses SolidCraft 0.28.0's web app.</small></p>
 <script>
 const get = id => document.getElementById(id);
 fetch('gallery.json').then(r => { if (!r.ok) throw new Error(); return r.json(); }).then(entries => {
@@ -25,13 +25,22 @@ fetch('gallery.json').then(r => { if (!r.ok) throw new Error(); return r.json();
   document.title = entry.title + ' · Dutchman CAD';
   for (const [id, value] of Object.entries({title: entry.title, source: 'Converted from ' + entry.source_app, what: entry.what, stats: entry.stats})) get(id).textContent = value;
   const credit = document.createElement('a'); credit.textContent = entry.credit.author; credit.href = entry.credit.link;
-  get('credit').append(credit, ' · ' + entry.credit.licence);
+  get('credit').append(credit, ' · ');
+  if (entry.credit.licence_link) { const licence = document.createElement('a'); licence.textContent = entry.credit.licence; licence.href = entry.credit.licence_link; get('credit').append(licence); }
+  else get('credit').append(entry.credit.licence);
+  if (entry.notice) { get('notice').textContent = entry.notice; get('notice').hidden = false; }
+  if (entry.hint) { get('hint').textContent = entry.hint; get('hint').hidden = false; }
+  if (!entry.design) {
+    get('viewer').remove(); get('open').remove();
+    get('still').src = '../' + entry.thumb; get('still').alt = entry.title + ' in SolidCraft'; get('still').hidden = false;
+    get('download').href = entry.download.url; get('download').textContent = 'Download the design (' + entry.download.size + ')';
+    get('status').hidden = true; get('design').hidden = false; return;
+  }
   const designURL = new URL(entry.design, 'https://dutchman-cad.github.io/demo/').href;
   get('viewer').title = entry.title + ' in SolidCraft';
   get('viewer').src = 'app/?embed&open=' + designURL;
   get('open').href = 'app/?open=' + designURL;
   get('download').href = entry.design;
-  if (entry.hint) { get('hint').textContent = entry.hint; get('hint').hidden = false; }
   get('status').hidden = true; get('design').hidden = false;
 }).catch(() => { get('status').textContent = 'The design details could not load. Please refresh or return to the gallery using the link above.'; });
 </script>
