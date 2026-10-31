@@ -32,6 +32,8 @@ Adding an entry requires one JSON object and two files:
 }
 ```
 
+A design over 5 MB takes `"heavy": {"size": "13.6 MB", "bodies": 191, "seconds": 150}`: its page shows the thumbnail and loads the viewer only on a click, because SolidCraft's web app blocks the page while it opens a design. `seconds` is the longest freeze measured in a headless browser with software rendering, so a machine with a GPU is faster. Measured so far: robot arm (3.8 MB) 4.5 s, RailCore (13.6 MB) 153 s.
+
 `design` is relative to `/demo/`; `thumb` is relative to the site root. A design too large for the browser viewer goes up as an asset of this repository's `designs-2026-10-30` release instead: leave out `design` and give `"download": {"url": "<asset URL>", "size": "<size>"}`; the viewer page then shows the thumbnail and a download link. Without a `url`, the page says the download is coming soon. Use local files and unique IDs. Keep credit links separate from the card's viewer link. Check the card at phone width, `view.html?d=<id>`, its full-app and download links, and an unknown ID. Serve over HTTP; browsers may block JSON fetches when opened through `file://`.
 
 ## Current conversions
