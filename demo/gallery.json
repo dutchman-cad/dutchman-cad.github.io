@@ -29,7 +29,12 @@
       "link": "https://github.com/railcore/parts"
     },
     "notice": "Converted from the original Fusion design to SolidCraft by Dutchman Convert; the design itself is unchanged.",
-    "hint": "In the full app, step through the History bar: 153 features came through editable, with their sketches. The rest of each part is an imported solid."
+    "hint": "In the full app, step through the History bar: 153 features came through editable, with their sketches. The rest of each part is an imported solid.",
+    "heavy": {
+      "size": "13.6 MB",
+      "bodies": 191,
+      "seconds": 150
+    }
   },
   {
     "id": "voron-2-4",
@@ -49,7 +54,11 @@
       "link": "https://github.com/VoronDesign/Voron-2"
     },
     "notice": "Not affiliated with Voron Design. The converted file is a derivative of the Voron 2.4r2 CAD, licensed GPL-3.0; its source is the Voron 2.4r2 assembly in the linked repository.",
-    "hint": "Too large for the browser viewer: download it and open it in SolidCraft on your computer."
+    "hint": "Too large for the browser viewer: download it and open it in SolidCraft on your computer.",
+    "heavy": {
+      "size": "245 MB",
+      "bodies": 1683
+    }
   },
   {
     "id": "history-block",

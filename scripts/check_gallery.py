@@ -26,6 +26,10 @@ for entry in entries:
     if design:
         if not (demo / design).is_file():
             problems.append(f"{name}: no design {design}")
+        elif (demo / design).stat().st_size > 5_000_000:
+            heavy = entry.get("heavy", {})
+            if not all(heavy.get(key) for key in ("size", "bodies", "seconds")):
+                problems.append(f"{name}: over 5 MB without heavy size, bodies, and seconds")
     elif not entry.get("download", {}).get("size"):
         problems.append(f"{name}: neither a design nor a download")
 for page in ("index.html", "view.html", "gallery.css"):
