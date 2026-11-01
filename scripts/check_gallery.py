@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Check demo/gallery.json: every entry is complete and every file it names exists."""
 import json
+import struct
 import sys
 from pathlib import Path
 
@@ -22,6 +23,25 @@ for entry in entries:
             problems.append(f"{name}: credit has no {key}")
     if not (root / entry.get("thumb", "missing")).is_file():
         problems.append(f"{name}: no thumbnail {entry.get('thumb')}")
+    if "card" in entry:
+        card = entry["card"]
+        for key in ("title", "line", "credit"):
+            if not isinstance(card, dict) or not card.get(key):
+                problems.append(f"{name}: card has no {key}")
+        directory = demo / "d" / name
+        if not (directory / "index.html").is_file():
+            problems.append(f"{name}: no card page demo/d/{name}/index.html")
+        image = directory / "og.png"
+        if not image.is_file():
+            problems.append(f"{name}: no card image demo/d/{name}/og.png")
+        else:
+            with image.open("rb") as stream:
+                header = stream.read(24)
+            if (len(header) != 24 or header[:8] != b"\x89PNG\r\n\x1a\n"
+                    or header[12:16] != b"IHDR"):
+                problems.append(f"{name}: card image is not a PNG")
+            elif struct.unpack(">II", header[16:24]) != (1200, 630):
+                problems.append(f"{name}: card image must be 1200x630")
     design = entry.get("design")
     if design:
         if not (demo / design).is_file():

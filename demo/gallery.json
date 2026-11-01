@@ -16,6 +16,11 @@
   },
   {
     "id": "railcore",
+    "card": {
+      "title": "RailCore II 300ZL, live in your browser",
+      "line": "A complete 3D printer from Fusion: 379 parts placed, 153 features editable.",
+      "credit": "RailCore® II 300ZL by J. Steve White and Tony Akens (CC BY 3.0)"
+    },
     "title": "RailCore II 300ZL",
     "source_app": "Fusion",
     "what": "A complete 3D printer: frame, motion system, and electronics enclosure, with every part where its designers placed it.",

@@ -36,6 +36,10 @@ A design over 5 MB takes `"heavy": {"size": "13.6 MB", "bodies": 191, "seconds":
 
 `design` is relative to `/demo/`; `thumb` is relative to the site root. A design too large for the browser viewer goes up as an asset of this repository's `designs-2026-10-30` release instead: leave out `design` and give `"download": {"url": "<asset URL>", "size": "<size>"}`; the viewer page then shows the thumbnail and a download link. Without a `url`, the page says the download is coming soon. Use local files and unique IDs. Keep credit links separate from the card's viewer link. Check the card at phone width, `view.html?d=<id>`, its full-app and download links, and an unknown ID. Serve over HTTP; browsers may block JSON fetches when opened through `file://`.
 
+## Add a social card
+
+Add a `card` object with `title`, `line`, and `credit` strings to the design's gallery entry. Run `python3 scripts/make_design_cards.py` from the repository root with SolidCraft CLI and headless Chromium installed. For a download-only design, pass a local source, such as `--source voron-2-4=/path/to/voron-2-4r2.sc`; the source stays outside the site. Use `--snapshot <id>=/path/to/render.png` to reuse a render at least 1600 pixels in each dimension. Inspect `demo/d/<id>/og.png`, run `python3 scripts/check_gallery.py`, and share `/demo/d/<id>/`. The static page supplies the social tags and forwards visitors to the viewer. The gallery uses this link for designs with cards.
+
 ## Current conversions
 
 All converted with Dutchman Convert 0.2.5 for SolidCraft 0.27.
