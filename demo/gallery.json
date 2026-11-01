@@ -63,6 +63,11 @@
     "heavy": {
       "size": "245 MB",
       "bodies": 1683
+    },
+    "card": {
+      "title": "Voron 2.4r2, converted to SolidCraft",
+      "line": "A complete 3D printer from Fusion: 1,683 parts, each in its own colour.",
+      "credit": "Voron 2.4r2 by Voron Design (GPL-3.0). Not affiliated with Voron Design."
     }
   },
   {
