@@ -18,7 +18,7 @@ import tempfile
 
 ROOT = Path(__file__).resolve().parent.parent
 DEMO = ROOT / "demo"
-SITE = "https://dutchman-cad.github.io/demo/"
+SITE = "https://dutchmancad.xyz/demo/"
 
 
 def chromium_path():
