@@ -1,15 +1,19 @@
 # Landing page sources
 
-- `convert-results-light.png`: cropped from our synthetic-cube UI screenshot,
-  `~/builds/site-lane/preview-paired-1600-day.png`, bounds `(884, 462, 1440, 558)`.
-- `convert-results-dark.png`: cropped from
-  `~/builds/site-lane/preview-paired-1280-night.png`, bounds `(711, 415, 1237, 538)`.
-- `convert-results-light-mobile.png` and `convert-results-dark-mobile.png`:
-  tighter crops of the same screenshots showing the two main summary chips,
-  at `(887, 507, 1115, 535)` and `(714, 458, 941, 485)`, respectively.
-  Desktop crops show the result summary; mobile crops keep the main chips
-  readable without shrinking them. PNG compression is optimised; no content
-  is retouched.
+- `convert-results-light.png` and `convert-results-dark.png`: unretouched crops
+  `(44, 810, 414, 942)` from fresh screenshots of the released 0.2.10 app,
+  `~/builds/site-lane/round4/result-440-day.png` and `result-440-night.png`.
+- `convert-title-light.png` and `convert-title-dark.png`: title crops
+  `(44, 608, 414, 632)` from the same screenshots. Title and summary are shown
+  as separate excerpts to omit the intervening paths and controls.
+  The public M3 Parametric FHCS file is the UI walk's `1-full-FHCS.f3d`,
+  copied into `~/builds/site-lane/round4/` with its descriptive name. The
+  released app converted it with history checking enabled, using SolidCraft
+  CLI 0.44.1. Its actual report records `mode: history`,
+  `verification.status: verified`, and four of four features rebuilt and
+  verified against the original. The screenshot retains the extrude caveat
+  and loss counts. Only cropping and PNG compression were applied. The same
+  excerpts are used on desktop and mobile; no temporary paths are visible.
 - `formats-0.2.10.json`: output of `dutchman formats --json` from the Linux x86_64
   binary in the GitHub v0.2.10 release. The archive was checked against the
   release's SHA-256 checksum. Labels use both `level` and `converts`; levels
