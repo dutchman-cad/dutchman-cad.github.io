@@ -1,32 +1,6 @@
 <!doctype html>
-<!-- The social preview card (1200 × 630). Our own drawing; render to og.png with:
-     chrome --headless=new --window-size=1200,630 --screenshot=og.png og-card.html -->
-<html><head><meta charset="utf-8">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&family=Archivo:wght@800&display=swap">
+<!-- Own typography and shapes. Render at 1200 × 630 to og.png. -->
+<html lang="en"><head><meta charset="utf-8"><title>Dutchman Convert social card</title>
 <style>
-html,body{margin:0;width:1200px;height:630px;overflow:hidden;background:#f4f5f3;font-family:"IBM Plex Sans",sans-serif;color:#1d2321}
-.card{position:absolute;inset:0;display:grid;grid-template-columns:1fr 440px;align-items:center;padding:0 70px;gap:30px}
-.k{font-family:"IBM Plex Mono",monospace;font-size:24px;color:#1f6f5c;letter-spacing:.04em}
-h1{font-family:"Archivo",sans-serif;font-weight:800;font-size:84px;line-height:1.02;margin:14px 0 22px}
-p{font-size:30px;line-height:1.35;margin:0;color:#3d4743}
-.apps{margin-top:30px;display:flex;gap:12px;flex-wrap:wrap}
-.apps span{border:2px solid #1f6f5c;color:#1f6f5c;border-radius:999px;padding:6px 18px;font-size:22px;font-weight:600}
-.bar{position:absolute;left:0;top:0;bottom:0;width:14px;background:#1f6f5c}
-</style></head><body><div class="bar"></div><div class="card">
-<div><div class="k">open CAD tools</div><h1>Dutchman CAD</h1>
-<p>Move designs between CAD programs, test that they come through right, and keep your work yours.</p>
-<div class="apps"><span>Convert</span><span>Fixtures</span><span>Pilot</span></div></div>
-<svg viewBox="0 0 440 440" width="440" height="440" aria-hidden="true">
-<g stroke="#1d2321" stroke-width="5" stroke-linejoin="round">
-<polygon points="20,150 100,104 180,150 100,196" fill="#e2efe9"/>
-<polygon points="20,150 100,196 100,276 20,230" fill="#c9ddd4"/>
-<polygon points="100,196 180,150 180,230 100,276" fill="#b4d0c4"/>
-<polygon points="260,210 340,164 420,210 340,256" fill="#e2efe9"/>
-<polygon points="260,210 340,256 340,336 260,290" fill="#c9ddd4"/>
-<polygon points="340,256 420,210 420,290 340,336" fill="#b4d0c4"/>
-</g>
-<path d="M150 300 C 190 360, 250 360, 282 320" fill="none" stroke="#1f6f5c" stroke-width="12" stroke-linecap="round"/>
-<path d="M258 318 l26 -2 l2 26" fill="none" stroke="#1f6f5c" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M300 110 C 260 50, 200 50, 168 90" fill="none" stroke="#c08a2e" stroke-width="12" stroke-linecap="round"/>
-<path d="M192 92 l-26 0 l-2 -26" fill="none" stroke="#c08a2e" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
-</svg></div></body></html>
+*{box-sizing:border-box}html,body{margin:0;width:1200px;height:630px;overflow:hidden;background:#f5f4ed;color:#182f2a;font-family:system-ui,sans-serif}.card{position:relative;height:100%;padding:52px 70px;border-left:14px solid #196b58}.brand{font-size:22px;font-weight:700;letter-spacing:-.03em}.label{margin-top:50px;color:#196b58;font:16px monospace;letter-spacing:.1em;text-transform:uppercase}h1{margin:18px 0 24px;font:76px/1.04 Georgia,serif;letter-spacing:-.04em;font-weight:400}em{font-style:normal;color:#196b58}.platforms{font-size:20px;color:#52655e}.route{position:absolute;right:64px;top:150px;width:320px;height:320px;border:1px solid #ccd5cb;border-radius:50%;display:grid;place-items:center}.route:after{content:"";position:absolute;inset:26px;border:1px dashed #ccd5cb;border-radius:50%}.route span{background:#196b58;color:#fffef9;padding:18px 24px;border-radius:5px;font-size:24px;z-index:1}.domain{position:absolute;right:70px;bottom:50px;font:16px monospace;color:#52655e}
+</style></head><body><div class="card"><div class="brand">Dutchman CAD</div><div class="label">Dutchman Convert</div><h1>Your designs.<br>Their history.<br><em>In SolidCraft.</em></h1><p class="platforms">Windows · macOS · Linux</p><div class="route" aria-hidden="true"><span>→ SolidCraft</span></div><div class="domain">dutchmancad.xyz</div></div></body></html>

@@ -3,64 +3,101 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dutchman CAD</title>
-<meta name="description" content="Open CAD tools: moving designs between programs, testing that they come through right, and helping more people and tools work with them.">
+<title>Dutchman Convert — bring your CAD history to SolidCraft</title>
+<meta name="description" content="Open Fusion, Inventor, SolidWorks and other CAD designs in SolidCraft. Dutchman Convert carries over feature history where supported and reports what could not convert.">
+<link rel="canonical" href="https://dutchmancad.xyz/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Dutchman CAD">
-<meta property="og:title" content="Dutchman CAD">
-<meta property="og:description" content="Open CAD tools: moving designs between programs, testing that they come through right, and helping more people and tools work with them.">
-<meta property="og:url" content="https://dutchman-cad.github.io/">
-<meta property="og:image" content="https://dutchman-cad.github.io/og.png">
+<meta property="og:title" content="Dutchman Convert — bring your CAD history to SolidCraft">
+<meta property="og:description" content="Open your CAD designs in SolidCraft, with their feature history. See what converts and download Dutchman Convert for Windows, macOS or Linux.">
+<meta property="og:url" content="https://dutchmancad.xyz/">
+<meta property="og:image" content="https://dutchmancad.xyz/og.png">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Two blocks with arrows between them, the words Dutchman CAD, and the tools Convert, Fixtures, and Pilot">
+<meta property="og:image:alt" content="Dutchman Convert: your designs, their history, in SolidCraft. Windows, macOS and Linux.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Dutchman CAD">
-<meta name="twitter:description" content="Open CAD tools: moving designs between programs, testing that they come through right, and helping more people and tools work with them.">
-<meta name="twitter:image" content="https://dutchman-cad.github.io/og.png">
-<meta name="twitter:image:alt" content="Two blocks with arrows between them, the words Dutchman CAD, and the tools Convert, Fixtures, and Pilot">
-<meta name="theme-color" content="#1f6f5c">
+<meta name="twitter:title" content="Dutchman Convert — bring your CAD history to SolidCraft">
+<meta name="twitter:description" content="Open your CAD designs in SolidCraft, with their feature history.">
+<meta name="twitter:image" content="https://dutchmancad.xyz/og.png">
+<meta name="twitter:image:alt" content="Dutchman Convert: your designs, their history, in SolidCraft. Windows, macOS and Linux.">
+<meta name="theme-color" content="#f5f4ed" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#101d1b" media="(prefers-color-scheme: dark)">
 <style>
-:root{--bg:#f6f7f5;--card:#fff;--ink:#16201c;--muted:#5b6762;--line:#dde3df;--teal:#2f6b5c;--amber:#c08a2e}
-@media (prefers-color-scheme:dark){:root{--bg:#121816;--card:#1a221f;--ink:#e6ece9;--muted:#9aa8a2;--line:#2b3631;--teal:#6fb7a2;--amber:#e0ad55}}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-main{max-width:860px;margin:0 auto;padding:40px 16px 64px}
-header .brand{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
-header .brand a{color:inherit;text-decoration:none}
-h1{font-size:34px;line-height:1.2;margin:6px 0 12px}
-h2{font-size:20px;margin:40px 0 12px}
-p{margin:0 0 12px}
-a{color:var(--teal)}
-.lead{font-size:18px;color:var(--muted)}
-.cta{display:inline-block;margin:16px 12px 0 0;padding:10px 18px;border-radius:8px;background:var(--teal);color:#fff;text-decoration:none;font-weight:600}
-.cta.alt{background:transparent;color:var(--teal);border:1px solid var(--teal)}
-.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:8px}
-.step{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px}
-.step .n{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--amber);color:#1b1408;font-weight:700;margin-bottom:8px}
-.step h3{margin:0 0 6px;font-size:16px}
-.step p{color:var(--muted);font-size:15px;margin:0}
-.fmts{margin:0 0 12px;padding-left:20px;color:var(--muted);font-size:15px}
-.fmts li{margin:3px 0}
-.fmts strong{color:var(--ink);font-weight:600}
-ul{padding-left:20px;margin:0}
-li{margin:0 0 8px}
-.apps{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 12px}
-.app{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:4px 12px;font-size:14px}
-footer{margin-top:48px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
-.proj{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px;margin:0 0 14px}.proj h3{margin:0 0 4px;font-size:18px}.proj .st{font-size:13px;color:var(--amber);font-weight:600;margin-bottom:6px}.proj p{color:var(--muted);margin:0 0 8px}.proj a.more{font-weight:600}</style>
+:root{color-scheme:light dark;--bg:#f5f4ed;--panel:#fffef9;--ink:#182f2a;--muted:#52655e;--line:#ccd5cb;--accent:#196b58;--wash:#e6ebe0;--button:#fff;--amber:#805415;--amber-bg:#f3e9d0;--shadow:0 20px 45px #18392c14}
+@media(prefers-color-scheme:dark){:root{--bg:#101d1b;--panel:#182824;--ink:#e7eee4;--muted:#b0c0b6;--line:#364c42;--accent:#95d8b9;--wash:#20372e;--button:#10231c;--amber:#efc278;--amber-bg:#3a3021;--shadow:0 20px 45px #0003}}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:24px}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}a{color:var(--accent);text-underline-offset:4px}a:hover{text-decoration-thickness:2px}a:focus-visible{outline:3px solid var(--accent);outline-offset:5px}p{margin:0 0 16px}h1,h2,h3{line-height:1.15;text-wrap:balance}h2{font:500 clamp(30px,3vw,40px)/1.15 Georgia,serif;letter-spacing:-.03em;margin:0 0 16px}h3{font-size:18px;margin:0 0 10px}code{font-size:.9em;overflow-wrap:anywhere}main,.nav,footer{max-width:1184px;margin:auto;padding-left:32px;padding-right:32px}.nav{min-height:96px;display:flex;align-items:center;justify-content:space-between;gap:24px;border-bottom:1px solid var(--line)}.brand{display:inline-flex;align-items:center;gap:12px;color:var(--ink);font-weight:750;font-size:18px;letter-spacing:-.03em;text-decoration:none}.mark{width:28px;height:30px;position:relative;border-bottom:4px solid var(--accent);display:inline-block}.mark:before,.mark:after{content:"";position:absolute;border:2px solid var(--accent);width:13px;height:17px;top:2px;transform:skewY(25deg)}.mark:before{left:0}.mark:after{right:0;top:7px}.nav-links{display:flex;gap:28px;font-size:14px}.nav-links a{color:var(--muted);text-decoration:none}.nav-links a:hover{color:var(--accent);text-decoration:underline}.skip{position:absolute;top:-80px;left:16px;background:var(--panel);padding:12px;z-index:2}.skip:focus{top:12px}.eyebrow{font:600 12px/1.5 ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:20px}.hero{display:grid;grid-template-columns:1fr 1fr;gap:44px;padding:76px 0 34px;align-items:center}h1{font:500 clamp(48px,5.3vw,68px)/1.04 Georgia,serif;letter-spacing:-.045em;margin:0 0 26px}h1 em{font-style:normal;color:var(--accent)}.lead{color:var(--muted);font-size:18px;max-width:520px;line-height:1.65}.actions{display:flex;flex-wrap:wrap;gap:10px;margin:28px 0 14px}.button{display:inline-flex;align-items:center;justify-content:center;gap:14px;padding:13px 20px;border-radius:5px;background:var(--accent);color:var(--button);font-weight:650;text-decoration:none;font-size:14px;border:1px solid var(--accent)}.button:hover{filter:brightness(1.08)}.button.secondary{background:transparent;color:var(--ink);border-color:var(--line)}.small{font-size:13px;color:var(--muted)}.proof{margin:0;background:#173c33;border:1px solid #31594a;border-radius:8px;padding:24px 18px 18px;box-shadow:var(--shadow);color:#edf4eb}.proof-top{display:flex;justify-content:space-between;gap:12px;font:12px ui-monospace,monospace;color:#bfcebf;margin:0 4px 24px}.proof-top span:first-child:before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:#a8d4a7;margin-right:9px}.proof img{display:block;width:100%;height:auto;border-radius:4px;background:#f1f5f4}.proof figcaption{font-size:14px;line-height:1.6;margin:20px 5px 2px;color:#cfddcf}.proof figcaption strong{display:block;font-weight:600;color:#f0f5ed;margin-bottom:4px}.downloads{font-size:12px;line-height:1.8;color:var(--muted);padding:0 0 38px;border-bottom:1px solid var(--line)}.downloads p{margin:5px 0}.downloads strong{font-weight:600;color:var(--ink)}.downloads a{white-space:nowrap;display:inline-block;margin-right:10px}.section{padding:54px 0;border-bottom:1px solid var(--line)}.section-head{display:flex;justify-content:space-between;gap:24px;align-items:baseline}.section-head p{color:var(--muted);font-size:14px}.intro{max-width:700px;color:var(--muted)}.formats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:6px;overflow:hidden;margin:24px 0 18px}.format{background:var(--panel);padding:18px 20px;display:flex;flex-direction:column;align-items:flex-start;gap:4px}.format h3{font-size:16px;margin:0}.ext{font:11px/1.5 ui-monospace,monospace;color:var(--muted)}.status{font-size:12px;margin-top:9px;color:var(--muted)}.status.history{color:var(--accent)}.status.partial,.status.preview{color:var(--amber)}.status:before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:currentColor;margin-right:7px}.format.preview-card{background:var(--wash)}.note{font-size:13px;color:var(--muted);max-width:850px}.news{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:26px}.news article{border-left:2px solid var(--accent);padding:4px 0 0 22px}.tag{display:inline-block;font:500 11px/1.5 ui-monospace,monospace;background:var(--amber-bg);color:var(--amber);padding:4px 8px;border-radius:3px;margin-bottom:16px}.news h3{font-size:22px;letter-spacing:-.03em}.news p{color:var(--muted);margin-bottom:0}.help-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:26px}.help{border:1px solid var(--line);border-radius:6px;padding:22px 20px;display:flex;flex-direction:column;background:var(--panel)}.help .number{font:12px ui-monospace,monospace;color:var(--accent);margin-bottom:24px}.help h3{font-size:17px}.help p{color:var(--muted);font-size:14px}.help a,.help code{margin-top:auto;font-size:13px}.help code{display:block;background:var(--wash);padding:8px;border-radius:3px;color:var(--ink)}
+/* The bot owns the following block's markup and copy. Only its presentation lives here. */
+h2:has(+.glance){font-size:30px;margin-top:54px}.glance{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:20px 28px;padding:0 0 48px;margin:24px 0 0;border-bottom:1px solid var(--line);font-size:12px;line-height:1.7;color:var(--muted);overflow-wrap:anywhere}.glance strong{color:var(--ink);font-size:13px}.glance li{margin:0}.projects{padding-bottom:30px}.project{display:grid;grid-template-columns:220px 1fr 170px;gap:28px;padding:24px 0;border-top:1px solid var(--line);align-items:baseline}.project:first-of-type{margin-top:26px}.project h3{margin:0;font-size:17px}.project p{color:var(--muted);font-size:14px;margin:0}.project>a{font-size:13px;justify-self:end}.principles{display:flex;flex-wrap:wrap;gap:12px 28px;font-size:13px;color:var(--muted);margin-top:32px}footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;padding-top:26px;padding-bottom:36px;font-size:12px;color:var(--muted)}footer p{margin:0}footer a{margin-left:20px}footer .licence a{margin-left:0}
+@media(min-width:1000px){.proof{margin-right:-10px;transform:rotate(-1deg)}}
+@media(max-width:900px){.hero{gap:28px}h1{font-size:50px}.help-grid{grid-template-columns:repeat(2,1fr)}.formats{grid-template-columns:repeat(3,1fr)}.glance{grid-template-columns:repeat(2,1fr)}.project{grid-template-columns:170px 1fr}.project>a{grid-column:2;justify-self:start}.proof{padding:18px 12px}.proof-top{font-size:10px}.actions{gap:8px}.button{padding:12px 14px}}
+@media(max-width:650px){main,.nav,footer{padding-left:22px;padding-right:22px}.nav{min-height:78px;gap:16px}.brand{font-size:16px;gap:8px}.nav-links{gap:16px;font-size:12px}.nav-links .desktop{display:none}.hero{grid-template-columns:1fr;padding-top:46px;gap:30px}h1{font-size:56px}.eyebrow{font-size:11px;margin-bottom:18px}.lead{font-size:17px}.actions{margin-top:24px}.proof{padding:20px 12px 16px}.proof-top{font-size:11px;margin-bottom:18px}.proof figcaption{font-size:13px;margin-top:16px}.downloads{padding-bottom:28px}.section{padding:38px 0}.section-head{display:block}.section-head p{margin-bottom:18px}.formats{grid-template-columns:repeat(2,1fr)}.format{padding:16px 12px}.format h3{font-size:15px}.ext{font-size:10px}.news{grid-template-columns:1fr;gap:28px}.help-grid{gap:12px}.help{padding:18px 14px}.help .number{margin-bottom:20px}.help h3{font-size:16px}.help p{font-size:13px}.help a,.help code{font-size:12px}.glance{grid-template-columns:1fr;gap:18px;padding-bottom:32px}h2:has(+.glance){margin-top:38px}.project{grid-template-columns:1fr;gap:10px;padding:22px 0}.project>a{grid-column:1}.principles{display:block}.principles span{display:block;margin:8px 0}footer{display:block}footer p{margin-bottom:12px}footer nav{margin:16px 0}footer nav a{margin:0 20px 0 0}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
 </head>
 <body>
-<main>
-<header>
-  <div class="brand">Dutchman CAD</div>
-  <h1>Open CAD tools</h1>
-  <p class="lead">For people who design with CAD and don't want their work locked inside one program. Dutchman CAD is a home for open tools: moving designs between programs, testing that they come through right, and helping more people and tools work with them. Much of it is built around <a href="https://github.com/tangency-labs/solidcraft">SolidCraft</a>, the open-source parametric CAD app, but not all of it.</p>
-  <a class="cta" href="https://github.com/dutchman-cad/dutchman#download">Download Dutchman Convert 0.2.10</a>
-  <a class="cta alt" href="https://github.com/dutchman-cad">GitHub</a>
-  <a class="cta alt" href="https://discord.gg/yTcseBEdeu">Discord</a>
+<a class="skip" href="#main">Skip to content</a>
+<nav class="nav" aria-label="Main navigation">
+  <a class="brand" href="./"><span class="mark" aria-hidden="true"></span>Dutchman CAD</a>
+  <div class="nav-links"><a href="#formats">Formats</a><a href="#help">Help out</a><a class="desktop" href="https://github.com/dutchman-cad">GitHub ↗</a></div>
+</nav>
+<main id="main">
+<header class="hero">
+  <div>
+    <p class="eyebrow">Dutchman Convert / v0.2.10</p>
+    <h1>Your designs.<br>Their history.<br><em>In SolidCraft.</em></h1>
+    <p class="lead">Open your Fusion, Inventor, SolidWorks, Onshape… designs in SolidCraft, with their feature history.</p>
+    <div class="actions">
+      <a class="button" id="download" href="https://github.com/dutchman-cad/dutchman/releases/latest">Download Dutchman Convert <span aria-hidden="true">↓</span></a>
+      <a class="button secondary" href="https://discord.gg/yTcseBEdeu">Discord <span aria-hidden="true">↗</span></a>
+    </div>
+    <p class="small">Free and open source. Windows, macOS and Linux.<br>History support varies by format. Onshape is in preview.</p>
+  </div>
+  <figure class="proof">
+    <div class="proof-top"><span>A conversion, with the details</span><span>.f3d → SolidCraft</span></div>
+    <a href="assets/convert-results-source.png" aria-label="View the full Dutchman Convert screenshot"><img src="assets/convert-results.png" width="712" height="310" alt="Dutchman Convert results card: four of four Fusion features rebuilt and verified in SolidCraft, with a warning that one extrude may use the wrong sketch region."></a>
+    <figcaption><strong>See what came across. And what didn’t.</strong>Every conversion reports the history it rebuilt and the details that need checking.</figcaption>
+  </figure>
 </header>
+<div class="downloads" aria-label="All downloads">
+<p><strong>Desktop apps:</strong> <a href="https://github.com/dutchman-cad/dutchman/releases/latest/download/dutchman-x86_64-pc-windows-msvc.msi">Windows MSI</a> <a href="https://github.com/dutchman-cad/dutchman/releases/latest/download/dutchman-macos-universal.dmg">macOS DMG</a> <a href="https://github.com/dutchman-cad/dutchman/releases/latest/download/dutchman-x86_64.AppImage">Linux x64 AppImage</a> <a href="https://github.com/dutchman-cad/dutchman/releases/latest/download/dutchman-aarch64.AppImage">Linux ARM64 AppImage</a></p>
+<p><strong>Archives:</strong> <a href="https://github.com/dutchman-cad/dutchman/releases/latest/download/dutchman-x86_64-pc-windows-msvc.zip">Windows ZIP</a> <a href="https://github.com/dutchman-cad/dutchman/releases/latest/download/dutchman-macos-universal.tar.gz">Mac universal</a> <a href="https://github.com/dutchman-cad/dutchman/releases/latest/download/dutchman-aarch64-apple-darwin.tar.gz">Mac Apple silicon</a> <a href="https://github.com/dutchman-cad/dutchman/releases/latest/download/dutchman-x86_64-apple-darwin.tar.gz">Mac Intel</a> <a href="https://github.com/dutchman-cad/dutchman/releases/latest/download/dutchman-x86_64-unknown-linux-gnu.tar.gz">Linux x64</a> <a href="https://github.com/dutchman-cad/dutchman/releases/latest/download/dutchman-aarch64-unknown-linux-gnu.tar.gz">Linux ARM64</a> <a href="https://github.com/dutchman-cad/dutchman/releases/download/v0.2.10/dutchman-bin-0.2.10-x86_64.pkg.tar.zst">Arch x64 package</a> <a href="https://github.com/dutchman-cad/dutchman/releases/latest">Checksums &amp; release notes ↗</a></p>
+</div>
+<section class="section" id="formats" aria-labelledby="formats-title">
+  <div class="section-head"><h2 id="formats-title">What converts</h2><p>Your native files → <a href="https://github.com/tangency-labs/solidcraft">SolidCraft</a></p></div>
+  <p class="intro">Keep editable features where they map. Bring across geometry where they don’t. The report tells you what was kept, changed or dropped.</p>
+  <div class="formats">
+    <article class="format"><h3>Fusion</h3><span class="ext">.f3d · .f3z</span><span class="status history">Full history</span></article>
+    <article class="format"><h3>FreeCAD</h3><span class="ext">.FCStd</span><span class="status history">Full history</span></article>
+    <article class="format"><h3>Inventor</h3><span class="ext">.ipt · .iam</span><span class="status partial">Partial history</span></article>
+    <article class="format"><h3>SolidWorks</h3><span class="ext">.sldprt · .sldasm</span><span class="status">Geometry</span></article>
+    <article class="format"><h3>CATIA</h3><span class="ext">.CATPart</span><span class="status">Geometry</span></article>
+    <article class="format"><h3>Rhino</h3><span class="ext">.3dm</span><span class="status">Geometry</span></article>
+    <article class="format"><h3>Creo View</h3><span class="ext">.pvz</span><span class="status">Geometry</span></article>
+    <article class="format"><h3>ACIS</h3><span class="ext">.sat · .sab · .smt · .smb</span><span class="status">Geometry</span></article>
+    <article class="format"><h3>STEP</h3><span class="ext">.step · .stp</span><span class="status">Geometry</span></article>
+    <article class="format"><h3>Creo / NX</h3><span class="ext">.prt · .prt.N (Creo)</span><span class="status">Not converting yet</span></article>
+    <article class="format"><h3>IGES</h3><span class="ext">.igs · .iges</span><span class="status">Import in SolidCraft</span></article>
+    <article class="format preview-card"><h3>Onshape</h3><span class="ext">Coming in 0.3.0</span><span class="status preview">Preview</span></article>
+  </div>
+  <p class="note">“Full history” means history can be rebuilt when all features map; some features or joints may still be lost. Inventor part history is conditional; assemblies carry placed parts. Support labels follow the <a href="assets/formats-0.2.10.json">0.2.10 format report</a>. Onshape is a preview for the next release.</p>
+</section>
+<section class="section" aria-labelledby="new-title">
+  <h2 id="new-title">New this week</h2>
+  <div class="news">
+    <article><span class="tag">Coming in 0.3.0</span><h3>Open native files inside SolidCraft</h3><p>The SolidCraft plugin installs from a ZIP. Open native CAD files right inside SolidCraft, without switching to a separate app.</p></article>
+    <article><span class="tag">Coming in 0.3.0 · Preview</span><h3>Bring your Onshape designs along</h3><p>Onshape support is in preview. Try it when 0.3.0 is released, check the conversion report, and tell us what didn’t come across.</p></article>
+  </div>
+</section>
+<section class="section" id="help" aria-labelledby="help-title">
+  <div class="section-head"><h2 id="help-title">Help make it better</h2><p>A file that fails is a place to start.</p></div>
+  <div class="help-grid">
+    <article class="help"><span class="number">01 / SHARE A FILE</span><h3>DM Dutchy on Discord</h3><p>Private by default. Send the native file and a STEP export if you have one. Only the Dutchman team sees it.</p><a href="https://discord.gg/yTcseBEdeu">Join Discord →</a></article>
+    <article class="help"><span class="number">02 / CHECK LOCALLY</span><h3>Check a folder</h3><p>Find conversion problems in a folder on your own computer. Your files stay with you.</p><code>dutchman doctor</code></article>
+    <article class="help"><span class="number">03 / FIND THE EDGES</span><h3>The stress corpus</h3><p>Explore the cases used to find conversion problems and keep track of progress.</p><a href="stress-corpus/">Visit the corpus →</a></article>
+    <article class="help"><span class="number">04 / MAKE A FIXTURE</span><h3>Small files. Known answers.</h3><p>Follow a short recipe in your CAD program. Help check conversions against a design we understand.</p><a href="fixtures/">See fixture recipes →</a></article>
+  </div>
+</section>
 
 <!-- glance:start -->
 <h2>At a glance</h2>
@@ -77,40 +114,35 @@ footer{margin-top:48px;padding-top:16px;border-top:1px solid var(--line);color:v
 </ul>
 <!-- glance:end -->
 
-<h2>Projects</h2>
-<div class="proj"><h3>Dutchman Convert</h3><div class="st">Version 0.2.10 · early development · Windows, macOS, and Linux</div>
-<p>Converts native CAD designs into SolidCraft designs, keeping feature history, sketches, assemblies, and joints where it can. It also writes FreeCAD documents, and every conversion lists what it couldn't carry across. It knows 12 formats:</p>
-<ul class="fmts">
-  <li><strong>Fusion</strong> (.f3d, .f3z) and <strong>FreeCAD</strong> (.FCStd): geometry, components, and feature history and joints when they map</li>
-  <li><strong>Inventor</strong> parts and assemblies (.ipt, .iam): geometry, placed parts, and feature history when every feature maps</li>
-  <li><strong>SolidWorks</strong> parts (.sldprt): geometry</li>
-  <li><strong>CATIA</strong> parts (.CATPart), <strong>Creo View</strong> (.pvz), <strong>Rhino</strong> (.3dm), <strong>ACIS</strong> (.sat, .sab, .smt, .smb), and <strong>STEP</strong> (.step, .stp): geometry, as solids and surfaces</li>
-  <li><strong>Creo</strong> and <strong>NX</strong> parts (.prt): recognised, but their geometry isn't read yet</li>
-  <li><strong>IGES</strong> (.igs, .iges): recognised; open these in SolidCraft directly (File › Import)</li>
-</ul>
-<a class="more" href="https://github.com/dutchman-cad/dutchman">Dutchman Convert on GitHub →</a></div>
-<div class="proj"><h3>Fixtures</h3><div class="st">Collecting · volunteers welcome</div>
-<p>Small, known test files made by volunteers in the real CAD programs, from short recipes, so the readers behind Dutchman Convert can be checked against ground truth.</p>
-<a class="more" href="https://dutchman-cad.github.io/fixtures/">How to help →</a></div>
-<div class="proj"><h3>Pilot</h3><div class="st">Early beta</div>
-<p>Helps small local language models drive SolidCraft from outside the app, through SolidCraft's Assistant or any MCP client. Run it as <code>dutchman pilot</code>, or download it on its own.</p>
-<a class="more" href="https://github.com/dutchman-cad/pilot">Pilot on GitHub →</a></div>
-
-<h2>Principles</h2>
-<ul>
-  <li><strong>Clean room.</strong> Formats are worked out from files people are entitled to use and from public information, never from vendor SDKs, decompiled programs, or confidential material.</li>
-  <li><strong>Your files stay yours.</strong> Nothing is uploaded unless you choose to share it, and reports never need your file names or paths.</li>
-  <li><strong>Honest output.</strong> Every conversion lists what it could not carry across.</li>
-</ul>
-
-<h2>Get involved</h2>
-<ul>
-  <li>Try <a href="https://github.com/dutchman-cad/dutchman#download">Dutchman Convert</a> on your own designs, and <a href="https://github.com/dutchman-cad/dutchman/issues/new/choose">report anything that doesn't convert</a>.</li>
-  <li>Make a few <a href="https://dutchman-cad.github.io/fixtures/">fixture files</a> in the CAD program you use.</li>
-  <li>Ask questions, share what you converted, and meet the people building these tools on the <a href="https://discord.gg/yTcseBEdeu">Dutchman CAD Discord</a>.</li>
-</ul>
-
-<footer>Dutchman CAD · open CAD tools · <a href="https://github.com/dutchman-cad">github.com/dutchman-cad</a> · <a href="https://discord.gg/yTcseBEdeu">Discord</a></footer>
+<section class="section projects" id="projects" aria-labelledby="projects-title">
+<h2 id="projects-title">Projects</h2>
+<div class="project"><h3>Dutchman Convert</h3><p>Native CAD files to SolidCraft, with feature history where supported and a report of what could not be carried across. Also writes FreeCAD documents.</p><a href="https://github.com/dutchman-cad/dutchman">View on GitHub ↗</a></div>
+<div class="project"><h3>Fixtures</h3><p>Small, known CAD files made from short recipes, so conversions can be checked against the original design.</p><a href="fixtures/">Make a fixture →</a></div>
+<div class="project"><h3>Pilot</h3><p>Connects local assistants to SolidCraft. Available through SolidCraft’s Assistant or the <code>dutchman pilot</code> command.</p><a href="https://github.com/dutchman-cad/pilot">View on GitHub ↗</a></div>
+<div class="principles"><span>Built from public information and files we may use.</span><span>Your files stay yours.</span><span>Every conversion reports its losses.</span></div>
+</section>
 </main>
+<footer>
+  <p>Dutchman CAD</p>
+  <nav aria-label="Footer"><a href="https://github.com/dutchman-cad">GitHub ↗</a><a href="https://discord.gg/yTcseBEdeu">Discord ↗</a></nav>
+  <p class="licence">Dutchman Convert · <a href="https://github.com/dutchman-cad/dutchman/blob/main/LICENSE">Apache-2.0 licence</a></p>
+</footer>
+<script>
+// Stable asset names follow the latest release; every build is also linked above.
+(() => {
+  const platform = navigator.userAgentData?.platform || navigator.platform || '';
+  const agent = navigator.userAgent;
+  const arm = /aarch64|arm64/i.test(platform + ' ' + agent);
+  let build, name;
+  if (/Win/i.test(platform)) { build = 'x86_64-pc-windows-msvc.msi'; name = 'Windows'; }
+  else if (/Mac/i.test(platform) && !/iPhone|iPad/i.test(agent) && navigator.maxTouchPoints < 2) { build = 'macos-universal.dmg'; name = 'macOS'; }
+  else if (/Linux/i.test(platform) && !/Android/i.test(agent)) { build = arm ? 'aarch64.AppImage' : 'x86_64.AppImage'; name = arm ? 'Linux ARM64' : 'Linux'; }
+  if (build) {
+    const link = document.getElementById('download');
+    link.href = 'https://github.com/dutchman-cad/dutchman/releases/latest/download/dutchman-' + build;
+    link.textContent = 'Download for ' + name + ' ↓';
+  }
+})();
+</script>
 </body>
 </html>
