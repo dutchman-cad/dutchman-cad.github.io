@@ -1,27 +1,26 @@
 # Landing page sources
 
-- `railcore-results-light.png` and `railcore-results-dark.png`: complete, native
-  567 × 361 app-card crops `(729, 104, 1296, 465)` from the new real GUI
-  screenshots `~/builds/site-lane/round5/shots/bed-result-day.png` and
-  `bed-status.png`. No text, pixels or counts were retouched or rescaled.
-  The card is displayed at its native CSS dimensions on desktop and scaled
-  down as one whole image on mobile.
+- `railcore-results-light.png` and `railcore-results-dark.png`: complete native
+  567 × 361 app-card crops `(729, 104, 1296, 465)` from a fresh RailCore
+  bed conversion. The `-mobile.png` variants are 428 × 433 crops
+  `(32, 359, 460, 792)` captured after resizing the same app window.
+  No text, pixels or counts were retouched or rescaled. Desktop uses native image dimensions;
+  mobile uses the same result reflowed in a narrower real app window.
 - `railcore-solidcraft.png`: unretouched native 570 × 327 viewport crop
-  `(292, 159, 862, 486)` from `round5/shots/railcore-model-clean.png`.
+  `(292, 159, 862, 486)` from the original full-printer capture.
   This is the newly converted full printer open in a private SolidCraft
   0.44.1 window, rather than a preview inside Dutchman Convert. The page
   labels the full printer view and its bed's conversion card separately.
 
 The input archive is [RailCore II 300ZL - Nov 2019.f3z](https://github.com/railcore/parts/blob/master/F3Z/RailCore%20II%20300ZL%20-%20Nov%202019.f3z),
-from the public RailCore/parts repository, saved as
-`~/RailCore/RailCore II 300ZL.f3z`. SHA-256:
+from the public RailCore/parts repository. SHA-256:
 `eb4afd93e0a5bba9159090909532a91862385f8fcf17ee74c4b687fa45b434fe`.
 The full conversion placed 379 of 379 components and produced a partial
 history (167 of 506 features rebuilt, with 2 kept and re-applied).
 
 For the compact full card, the archive's unmodified
 `56626b2f-7382-4b0a-b53e-c9c0ef1f46f1.f3d` member (`300ZL Bed` in
-`DesignDescription.json`) was saved as `~/RailCore/RailCore 300ZL Bed.f3d`
+`DesignDescription.json`) was named `RailCore 300ZL Bed.f3d`
 and converted again in the app. Its exact displayed outcome is:
 
 > Converted RailCore 300ZL Bed.f3d
@@ -30,18 +29,15 @@ and converted again in the app. Its exact displayed outcome is:
 >
 > Losses: 36 Info, 20 Degraded
 
-Both runs used the newest available GUI under `~/builds`,
-`buildq-target/dutchman/dm-ci-audit-check-4485e3d5/debug/dutchman-gui`
-(built 2026-11-18 15:32). Its source revision `7bad9c37` has the same
-application/conversion code as main's `16f61ba8`; later changes through
-main `f0748301` were CI/documentation changes. Output remains in the clean
-`~/RailCore/RailCore II 300ZL (SolidCraft)/` folder.
+Both runs used the GUI built 2026-11-18 15:32. Its source revision
+`7bad9c37` has the same application/conversion code as main's `16f61ba8`;
+changes through main `f0748301` were CI/documentation changes.
 
-Capture followed the UI walk kit in a private Xvfb :89 session with browser
-stubs and private XDG folders. A real Xdnd file drop worked around the
-newer build's file picker under Xvfb. The source captures, conversion
-reports, helper scripts and full-printer result are retained outside the
-site under `~/builds/site-lane/round5/` and `~/RailCore/`.
+Capture followed the UI walk kit in a private Xvfb session with browser
+stubs and isolated XDG folders. A real Xdnd file drop worked around the
+file picker under Xvfb. The refreshed card uses a neutral RailCore folder
+for both conversion output and diagnostics. Original captures and reports
+are retained outside the published site.
 
 RailCore II is by J. Steve White and Tony Akens, with additional
 contributors credited in the source repository, under CC BY-SA 4.0.
