@@ -1,21 +1,24 @@
 # Landing page sources
 
-- `railcore-solidcraft.webp` and `railcore-solidcraft-mobile.webp`: new real
-  SolidCraft 0.44.1 viewport captures of the converted full printer. The
-  camera was zoomed out and panned in the app, leaving the complete printer
-  above the bottom toolbar and space beside it for the result window.
-  Desktop is a native 1008 × 630 crop `(256, 159, 1264, 789)`; mobile is a
-  native 720 × 630 crop `(256, 159, 976, 789)` of the same capture. WebP
-  compression is lossless, with no painting, retouching or resampling.
-- `railcore-summary-light.png` and `railcore-summary-dark.png`: native
-  428 × 311 crops `(0, 0, 428, 311)` of the mobile result captures below,
-  retaining the title, controls, summary and losses. Desktop displays these
-  at 400 CSS pixels wide, keeping the 14 px body text above 13 px.
-- `railcore-results-light-mobile.png` and `railcore-results-dark-mobile.png`:
-  the complete 428 × 433 result card, captured after resizing the real app
-  window. Original capture bounds: `(32, 359, 460, 792)`. Mobile displays
-  the whole card below the printer, without overlap; at a 400 px viewport
-  its body text is just over 13 px. No text, pixels or counts were retouched.
+- `railcore-solidcraft.webp` / `railcore-solidcraft@2x.webp` and the matching
+  `-mobile` variants: new real SolidCraft 0.44.1 viewport captures. Xvfb ran
+  at 3200 × 2000 with 192 dpi and the app at 2640 × 1680, using 2× UI scale.
+  The camera was zoomed and panned in the app; the printer occupies about
+  71% of the frame height, fully visible above the toolbar.
+  The native desktop 2× crop is `(512, 318, 2528, 1578)`, 2016 × 1260.
+  The mobile 2× crop is `(880, 318, 2160, 1578)`, 1280 × 1260.
+  1× variants are downsampled by half with Lanczos. All are high-quality
+  WebP (desktop quality 98 / 92, mobile 98 / 96), under 200 KB each.
+- `railcore-title-{light,dark}` and `railcore-summary-{light,dark}`, each
+  with 1× and `@2x` PNGs: fresh real Dutchman Convert captures at 2× UI
+  scale. Title crop: `(64, 734, 920, 812)`, 856 × 78. Summary and Losses
+  crop: `(64, 1164, 920, 1344)`, 856 × 180. These are two separate image
+  elements; the omitted controls, capability, log and output rows are not
+  part of either image. The 2× PNGs match the native crops pixel for pixel;
+  the 1× variants are downsampled by half. No text or numbers were edited.
+  Displaying the card at 400 CSS pixels wide keeps its body text above
+  13 px. At a 400 px viewport, the 398 px card follows the printer without
+  overlap and also keeps body text above 13 px.
 
 The input archive is [RailCore II 300ZL - Nov 2019.f3z](https://github.com/railcore/parts/blob/master/F3Z/RailCore%20II%20300ZL%20-%20Nov%202019.f3z),
 from the public RailCore/parts repository. SHA-256:
@@ -34,9 +37,11 @@ and converted again in the app. Its exact displayed outcome is:
 >
 > Losses: 36 Info, 20 Degraded
 
-Both runs used the GUI built 2026-11-18 15:32. Its source revision
-`7bad9c37` has the same application/conversion code as main's `16f61ba8`;
-changes through main `f0748301` were CI/documentation changes.
+The full-printer conversion used the GUI built 2026-11-18 15:32, source
+revision `7bad9c37`, with the same conversion code as main's `16f61ba8`.
+The fresh bed conversion and 2× card captures used released v0.2.10;
+the earlier main build was no longer available. The displayed result
+remains exactly the same, including its unverified-extrude warning.
 
 Capture followed the UI walk kit in a private Xvfb session with browser
 stubs and isolated XDG folders. A real Xdnd file drop worked around the
@@ -47,7 +52,8 @@ are retained outside the published site.
 RailCore II is by J. Steve White and Tony Akens, with additional
 contributors credited in the source repository, under CC BY-SA 4.0.
 The full converted printer and the bed card are distinct, clearly labelled
-examples. PNG compression is lossless; only window/viewport crops were made.
+examples. The card PNGs use lossless compression. Model images use high-quality WebP;
+only real viewport captures supply their contents.
 
 - `formats-0.2.10.json`: output of `dutchman formats --json` from the Linux x86_64
   binary in the GitHub v0.2.10 release. The archive was checked against the

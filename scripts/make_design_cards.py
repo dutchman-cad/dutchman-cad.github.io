@@ -56,7 +56,7 @@ def page(entry):
 <meta name="twitter:image" content="{image}">
 <link rel="canonical" href="{url}">
 <meta http-equiv="refresh" content="0; url={target}">
-</head><body><p><a href="{target}">Open {html.escape(entry['title'])}</a></p></body></html>
+</head><body><p><a href="{target}" target="_blank" rel="noopener">Open {html.escape(entry['title'])}</a></p></body></html>
 '''
 
 
