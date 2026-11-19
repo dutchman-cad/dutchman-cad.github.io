@@ -9,39 +9,36 @@
   The mobile 2× crop is `(880, 318, 2160, 1578)`, 1280 × 1260.
   1× variants are downsampled by half with Lanczos. All are high-quality
   WebP (desktop quality 98 / 92, mobile 98 / 96), under 200 KB each.
-- `railcore-title-{light,dark}` and `railcore-summary-{light,dark}`, each
-  with 1× and `@2x` PNGs: fresh real Dutchman Convert captures at 2× UI
-  scale. Title crop: `(64, 734, 920, 812)`, 856 × 78. Summary and Losses
-  crop: `(64, 1164, 920, 1344)`, 856 × 180. These are two separate image
-  elements; the omitted controls, capability, log and output rows are not
-  part of either image. The 2× PNGs match the native crops pixel for pixel;
-  the 1× variants are downsampled by half. No text or numbers were edited.
-  Displaying the card at 400 CSS pixels wide keeps its body text above
-  13 px. At a 400 px viewport, the 398 px card follows the printer without
-  overlap and also keeps body text above 13 px.
+- `railcore-printer-{title,summary,tail,losses}-{light,dark}`, each with
+  1× and `@2x` PNGs: fresh real whole-printer conversion captures at 2× UI
+  scale. Title crop: `(64, 430, 920, 506)`. First two summary lines:
+  `(64, 860, 920, 940)`. Its final word, on the next native line:
+  `(64, 940, 190, 980)`. Losses line from the bottom of the same result:
+  `(64, 1300, 920, 1348)`. These are separate image elements, retaining
+  their native left alignment and scale. The 2× PNGs match the original
+  crops pixel for pixel; 1× variants are downsampled by half. No text or
+  numbers were edited. Controls, paths and lengthy detail text are omitted.
+  Body text remains above 13 px, including at a 400 px viewport.
 
 The input archive is [RailCore II 300ZL - Nov 2019.f3z](https://github.com/railcore/parts/blob/master/F3Z/RailCore%20II%20300ZL%20-%20Nov%202019.f3z),
 from the public RailCore/parts repository. SHA-256:
 `eb4afd93e0a5bba9159090909532a91862385f8fcf17ee74c4b687fa45b434fe`.
-The full conversion placed 379 of 379 components and produced a partial
-history (167 of 506 features rebuilt, with 2 kept and re-applied).
+For the fresh whole-printer conversion, the entire unmodified archive was
+copied to a neutral folder as `RailCore 300ZL.f3z`. The bed file was not
+renamed or used for this result. The input has the same SHA-256 above.
+The new run placed 379 of 379 components, with 167 of 506 features rebuilt
+and 2 kept and re-applied. The exact card text shown is:
 
-For the compact full card, the archive's unmodified
-`56626b2f-7382-4b0a-b53e-c9c0ef1f46f1.f3d` member (`300ZL Bed` in
-`DesignDescription.json`) was named `RailCore 300ZL Bed.f3d`
-and converted again in the app. Its exact displayed outcome is:
-
-> Converted RailCore 300ZL Bed.f3d
+> Converted RailCore 300ZL.f3z
 >
-> Partial editable history, 3 of 8 features rebuilt; imported final shape visible. 1 rebuilt extrude may use the wrong sketch region; it couldn't be checked against the source.
+> Partial editable history, 167 of 506 features rebuilt, 2 kept and re-applied to the final body; imported final shape visible.
 >
-> Losses: 36 Info, 20 Degraded
+> Losses: 1014 Info, 1058 Degraded, 119 Dropped
 
-The full-printer conversion used the GUI built 2026-11-18 15:32, source
-revision `7bad9c37`, with the same conversion code as main's `16f61ba8`.
-The fresh bed conversion and 2× card captures used released v0.2.10;
-the earlier main build was no longer available. The displayed result
-remains exactly the same, including its unverified-extrude warning.
+This run used the newest available GUI, built 2026-11-18 23:33 and labelled
+0.2.10. Its detailed report includes unverified or differing retained
+features; the hero shows only the first summary sentence and Losses line,
+as requested. The 3D view is the same complete printer from this archive.
 
 Capture followed the UI walk kit in a private Xvfb session with browser
 stubs and isolated XDG folders. A real Xdnd file drop worked around the
@@ -51,8 +48,7 @@ are retained outside the published site.
 
 RailCore II is by J. Steve White and Tony Akens, with additional
 contributors credited in the source repository, under CC BY-SA 4.0.
-The full converted printer and the bed card are distinct, clearly labelled
-examples. The card PNGs use lossless compression. Model images use high-quality WebP;
+The viewport and result card both refer to the complete printer. The card PNGs use lossless compression. Model images use high-quality WebP;
 only real viewport captures supply their contents.
 
 - `formats-0.2.10.json`: output of `dutchman formats --json` from the Linux x86_64
@@ -74,3 +70,12 @@ placed parts and sub-assemblies from the project. CATIA, Rhino, Creo View,
 ACIS and STEP carry geometry. Creo and NX are not converted in 0.2.10; IGES
 must be imported directly in SolidCraft. NX and Onshape future-release labels
 are kept separate from current support.
+
+The support table groups Fusion archives, Inventor parts/assemblies, and
+SolidWorks parts/assemblies into one row per program. Partial history means
+where mapped; components and placed parts populate the Assemblies column.
+Geometry-only entries do not claim history or placed assemblies. Onshape
+capabilities are n/a because the 0.2.10 report does not list them. NX shape
+is marked Yes only alongside its explicit coming-in-0.3.0 status, based on
+the review's merged-main update; the archived report is unchanged. IGES is
+not converted by Dutchman and instead points to SolidCraft's own importer.
