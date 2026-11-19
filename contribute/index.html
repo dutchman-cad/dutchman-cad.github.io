@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contribute to Dutchman CAD — four ways to help</title>
+<meta name="description" content="Use Dutchman Convert, report a problem, diagnose it with your AI, or fix it and open a pull request. Four ways to help, with privacy rules and commands.">
+<link rel="canonical" href="https://dutchmancad.xyz/contribute/">
+<link rel="help" href="https://github.com/dutchman-cad/dutchman/blob/main/CONTRIBUTING.md">
+<link rel="describedby" href="../llms.txt" type="text/plain">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Dutchman CAD">
+<meta property="og:title" content="Help make Dutchman better: four ways, pick your level">
+<meta property="og:description" content="From trying your own files to opening a pull request. Start where you are, keep your designs private, and choose how far to go.">
+<meta property="og:url" content="https://dutchmancad.xyz/contribute/">
+<meta property="og:image" content="https://dutchmancad.xyz/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#f5f4ed" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#101d1b" media="(prefers-color-scheme: dark)">
+<link rel="stylesheet" href="contribute.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<nav class="nav" aria-label="Main navigation">
+  <a class="brand" href="../"><span class="mark" aria-hidden="true"></span>Dutchman CAD</a>
+  <div class="nav-links"><a href="../#formats">Formats</a><a href="#levels" aria-current="page">Contribute</a><a href="https://github.com/dutchman-cad" target="_blank" rel="noopener">GitHub ↗</a><a href="https://discord.gg/yTcseBEdeu" target="_blank" rel="noopener">Discord ↗</a></div>
+</nav>
+<main id="main">
+<header class="page-intro">
+  <p class="eyebrow">Contribute / Dutchman CAD</p>
+  <h1>Help make Dutchman better:<br><em>four ways, pick your level.</em></h1>
+  <p class="lead">Start by using Dutchman Convert on your own designs. Tell us what didn’t come across, investigate with your AI, or take a fix through to a pull request. You choose how far to go.</p>
+  <nav class="level-links" aria-label="Choose your contribution level"><a href="#use">1 · Use it</a><a href="#report">2 · Report it</a><a href="#diagnose">3 · Diagnose it</a><a href="#fix">4 · Fix it</a><a href="#your-ai">Give this to your AI ↓</a></nav>
+</header>
+<div id="levels">
+<section class="tier" id="use" aria-labelledby="use-title">
+  <div class="tier-label"><span class="eyebrow">Tier 1</span><h2 id="use-title">Use it</h2></div>
+  <div class="tier-content">
+    <p><a href="../#install-title" target="_blank" rel="noopener">Install Dutchman Convert</a>, then convert as many of your own files as you can. Try whole folders, parts and assemblies. Open the results in <a href="https://solidcraft.io" target="_blank" rel="noopener">SolidCraft</a> and see what doesn’t come across yet.</p>
+    <pre><code>dutchman --version
+dutchman convert-all --out-dir converted ./my-designs
+dutchman doctor ./my-designs --out checked</code></pre>
+    <p><code>convert-all</code> searches subfolders. <code>doctor</code> checks a folder, diagnoses failing designs and groups repeated findings. Keep both output folders outside your input library; use fresh output paths for a new run.</p>
+    <p class="source-links">Read: <a href="https://github.com/dutchman-cad/dutchman/blob/main/docs/testing-your-library.md#2-run-the-batch" target="_blank" rel="noopener">Run the batch</a> · <a href="https://github.com/dutchman-cad/dutchman/blob/main/docs/testing-your-library.md#check-a-folder-with-doctor" target="_blank" rel="noopener">Check a folder with doctor</a> · <a href="https://github.com/dutchman-cad/dutchman/blob/main/docs/install.md" target="_blank" rel="noopener">Install guide</a></p>
+  </div>
+</section>
+<section class="tier" id="report" aria-labelledby="report-title">
+  <div class="tier-label"><span class="eyebrow">Tier 2</span><h2 id="report-title">Report it</h2></div>
+  <div class="tier-content">
+    <p>Every conversion shows you what it lost. Nothing is sent to us unless you send it. Choose the route that suits you:</p>
+    <ul class="report-options">
+      <li><strong>Private DM.</strong> Message Dutchy on <a href="https://discord.gg/yTcseBEdeu" target="_blank" rel="noopener">Discord</a>. If you choose to send a design of your own that you have the right to share, send its STEP export too. Files sent this way are private by default and used only to fix the converter.</li>
+      <li><strong>Anonymous report.</strong> Run the command below, review <code>report-anon.json</code>, then choose whether to share it. It contains counts and causes, without file names, paths or geometry.</li>
+      <li><strong>GitHub issue.</strong> Open <a href="https://github.com/dutchman-cad/dutchman/issues/new?template=file-did-not-convert.yml" target="_blank" rel="noopener">A file didn’t convert</a>, or use the <a href="https://github.com/dutchman-cad/dutchman/issues/new/choose" target="_blank" rel="noopener">Library test report form</a> for a batch. File one issue per distinct cause, with the reviewed anonymous report.</li>
+    </ul>
+    <pre><code>dutchman convert-all --out-dir converted --report-anon report-anon.json &lt;files&gt;</code></pre>
+    <p>Replace <code>&lt;files&gt;</code> with your files or folders. Include the source program and version, the report’s <code>versions</code> block unchanged, and <code>dutchman --version</code> and <code>solidcraft-cli --version</code> output (or “none” if SolidCraft isn’t installed).</p>
+    <aside class="privacy" aria-label="Privacy rules"><h3>Keep your designs private</h3><p>Never attach the original design to a public report. Do not share employer or customer files, or models downloaded from libraries. Keep report keys, salts, ordinary logs, journals and per-file JSON reports private: they can contain names and paths.</p><p>Share only reviewed anonymous reports, code, or a small synthetic reproduction rebuilt from scratch that reproduces the problem and you are free to share. Include its STEP export and a public licence such as CC0.</p></aside>
+    <p><strong>Report on Dutchman first, even if the cause is upstream.</strong> We work out whether a fix belongs in Dutchman, cadmpeg or SolidCraft, route it, and tell you when a Dutchman release includes it.</p>
+    <p class="source-links">Read: <a href="https://github.com/dutchman-cad/dutchman/blob/main/CONTRIBUTING.md#reporting-a-problem" target="_blank" rel="noopener">Reporting a problem</a> · <a href="https://github.com/dutchman-cad/dutchman/blob/main/docs/testing-your-library.md#4-what-is-safe-to-share" target="_blank" rel="noopener">What is safe to share</a> · <a href="https://github.com/dutchman-cad/dutchman/blob/main/docs/testing-your-library.md#5-report-what-you-found" target="_blank" rel="noopener">Report what you found</a> · <a href="https://github.com/dutchman-cad/dutchman/blob/main/README.md#report-a-file-that-fails-or-converts-wrong" target="_blank" rel="noopener">Private file sharing</a></p>
+  </div>
+</section>
+<section class="tier" id="diagnose" aria-labelledby="diagnose-title">
+  <div class="tier-label"><span class="eyebrow">Tier 3</span><h2 id="diagnose-title">Diagnose it<br>with your AI</h2></div>
+  <div class="tier-content">
+    <p>Point a local assistant at the failing file’s conversion report. Have it explain the failure stage and finding codes, trace the cause, and help you make a minimum reproduction. Keep private per-file reports local; give a remote chat assistant only the reviewed anonymous report.</p>
+    <pre><code>dutchman repro part.f3d --out original-reproduction
+dutchman repro small.f3d --out small-reproduction</code></pre>
+    <p>Use your actual file names and fresh output folders. Follow <code>kit/next-steps.md</code> to rebuild a small example in your CAD program using generic shapes and simple public dimensions. Compare the two kits’ <code>anonymous.json</code>: the failure stage and complete set of finding codes must match; counts may shrink. A broad category without structured codes is only a candidate match.</p>
+    <p>Keep <code>local-key.json</code> and any geometry copied from the original on your computer. Rebuild from scratch before sharing. If the kit says <code>no_failure_to_reproduce</code>, this run succeeded; don’t claim a reproduced failure.</p>
+    <p class="source-links">Read: <a href="https://github.com/dutchman-cad/dutchman/blob/main/docs/minimum-reproduction.md#make-the-kit" target="_blank" rel="noopener">Make the kit</a> · <a href="https://github.com/dutchman-cad/dutchman/blob/main/docs/minimum-reproduction.md#rebuild-and-compare" target="_blank" rel="noopener">Rebuild and compare</a> · <a href="https://github.com/dutchman-cad/dutchman/blob/main/docs/testing-your-library.md#let-your-own-ai-make-a-minimum-reproduction" target="_blank" rel="noopener">Detailed assistant prompt</a></p>
+  </div>
+</section>
+<section class="tier" id="fix" aria-labelledby="fix-title">
+  <div class="tier-label"><span class="eyebrow">Tier 4</span><h2 id="fix-title">Fix it and<br>open a PR</h2></div>
+  <div class="tier-content">
+    <p>Have your AI work on a branch in your fork of <a href="https://github.com/dutchman-cad/dutchman" target="_blank" rel="noopener">dutchman-cad/dutchman</a>, starting from <code>main</code>. Read <a href="https://github.com/dutchman-cad/dutchman/blob/main/AGENTS.md" target="_blank" rel="noopener">AGENTS.md</a> and <a href="https://github.com/dutchman-cad/dutchman/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">CONTRIBUTING.md</a> before changing code. Rust 1.88 or newer is required.</p>
+    <details><summary>Build and check a Dutchman change</summary><pre><code>cargo build --release
+scripts/solidcraft-window.sh --print
+python3 scripts/check-version-gates.py --base HEAD
+python3 -m unittest discover -s scripts/tests -v
+cargo fmt --all --check
+cargo clippy --workspace --all-targets --locked -- -D warnings
+cargo test --workspace --locked
+python3 scripts/changelog.py check
+python3 scripts/changelog.py preview</code></pre></details>
+    <p>Keep the PR to one topic, add a synthetic regression test with its origin recorded, update affected docs and skills, and add a <code>changelog.d/</code> fragment. Open against <code>main</code> and make sure CI passes. Use your own account and review what will be published.</p>
+    <p>Native decoding belongs in cadmpeg; mapping and messages belong in Dutchman; a SolidCraft problem may need a fix there. <strong>Report on Dutchman first; we route it.</strong> Keep a Dutchman PR that needs an upstream change in draft until that change is merged and Dutchman’s pin includes it. Follow the destination repo’s contribution rules too.</p>
+    <p class="source-links">Read: <a href="https://github.com/dutchman-cad/dutchman/blob/main/CONTRIBUTING.md#building-and-checking" target="_blank" rel="noopener">Building and checking</a> · <a href="https://github.com/dutchman-cad/dutchman/blob/main/CONTRIBUTING.md#pull-requests" target="_blank" rel="noopener">Pull request rules</a> · <a href="https://github.com/dutchman-cad/dutchman/blob/main/CONTRIBUTING.md#clean-room-rule" target="_blank" rel="noopener">Clean-room rule</a> · <a href="https://github.com/dutchman-cad/dutchman/blob/main/docs/testing-your-library.md#want-to-go-further" target="_blank" rel="noopener">Detailed report-to-fix workflow</a></p>
+    <p class="note">These four website levels run from using the app to a PR. The repo’s “Want to go further?” guide numbers its four steps <em>after</em> reporting: reproduce, diagnose, fix upstream, finish in Dutchman.</p>
+  </div>
+</section>
+</div>
+<section class="ai-section" id="your-ai" aria-labelledby="ai-title">
+  <p class="eyebrow">Start a conversation</p>
+  <h2 id="ai-title">Give this to your AI</h2>
+  <p>Choose your level, copy the prompt and paste it into your assistant. A local assistant can run the checks; a remote assistant can coach you using anonymous reports. The button only copies text.</p>
+  <div class="prompt-controls"><label for="tier-choice">How far do you want to go?</label><select id="tier-choice"><option value="1">Tier 1 · Use it</option><option value="2">Tier 2 · Report it</option><option value="3">Tier 3 · Diagnose it</option><option value="4">Tier 4 · Fix it and open a PR</option></select><button id="copy-prompt" type="button" aria-label="Copy contribution prompt">Copy prompt</button><span id="copy-status" role="status"></span></div>
+  <label class="visually-hidden" for="ai-prompt">Contribution prompt; choose a tier above or edit before copying</label>
+  <textarea id="ai-prompt" rows="11" spellcheck="false">I want to help the Dutchman CAD project. Read https://dutchmancad.xyz/llms.txt and https://github.com/dutchman-cad/dutchman/blob/main/AGENTS.md, then https://github.com/dutchman-cad/dutchman/blob/main/CONTRIBUTING.md. Guide me through website tier 1 (Use it), including the earlier levels as needed. The website levels differ from the repo's post-report tiers; use the website numbering for my choice.
+
+Keep my original designs and private reports local. Never upload or post my files, geometry, names, paths, keys or salts. Use only reviewed anonymous reports with a remote assistant. Help me rebuild any shared reproduction from scratch with generic shapes and public dimensions; confirm its failure stage and complete finding-code set match. Report on Dutchman first even if the cause is upstream. Ask before sending a report, posting an issue or opening a PR. Stop at my chosen level.</textarea>
+  <noscript><p>Select the prompt text and copy it, replacing “tier 1 (Use it)” with your chosen level.</p></noscript>
+  <p class="note">For agents starting from a link: <a href="../llms.txt" target="_blank" rel="noopener">/llms.txt</a> brings the commands, privacy rules and source guides together.</p>
+</section>
+<section class="other-ways" aria-labelledby="other-title">
+  <h2 id="other-title">Other ways to help</h2>
+  <div class="other-grid">
+    <article><h3>Make a fixture</h3><p>Build small, known designs from the <a href="https://dutchmancad.xyz/fixtures/" target="_blank" rel="noopener">fixture recipes</a>. Type <code>/volunteer</code> on <a href="https://discord.gg/yTcseBEdeu" target="_blank" rel="noopener">Discord</a> for your personal portal link; the latest recipe booklet (PDF) is linked from that portal.</p></article>
+    <article><h3>Take a stress-corpus batch</h3><p>Help check the test parts in SolidCraft and FreeCAD. The <a href="https://dutchmancad.xyz/stress-corpus/#take-part" target="_blank" rel="noopener">take-part guide</a> explains how to claim a batch and return your results.</p></article>
+  </div>
+</section>
+</main>
+<footer>
+  <p>Dutchman CAD</p>
+  <nav aria-label="Footer"><a href="https://github.com/dutchman-cad" target="_blank" rel="noopener">GitHub ↗</a><a href="https://discord.gg/yTcseBEdeu" target="_blank" rel="noopener">Discord ↗</a></nav>
+  <p>Dutchman Convert · <a href="https://github.com/dutchman-cad/dutchman/blob/main/LICENSE" target="_blank" rel="noopener">Apache-2.0 licence</a></p>
+  <p class="agent-guide">For AI agents: <a href="../llms.txt" target="_blank" rel="noopener">/llms.txt</a></p>
+</footer>
+<script>
+const promptField = document.getElementById('ai-prompt');
+const choice = document.getElementById('tier-choice');
+const template = promptField.value;
+const levels = {'1': 'Use it', '2': 'Report it', '3': 'Diagnose it', '4': 'Fix it and open a PR'};
+const copyButton = document.getElementById('copy-prompt');
+const copyStatus = document.getElementById('copy-status');
+let reset;
+function clearFeedback() {
+  clearTimeout(reset);
+  copyButton.textContent = 'Copy prompt';
+  copyStatus.textContent = '';
+}
+choice.addEventListener('change', () => {
+  clearFeedback();
+  promptField.value = template.replace('tier 1 (Use it)', 'tier ' + choice.value + ' (' + levels[choice.value] + ')');
+});
+promptField.addEventListener('input', clearFeedback);
+copyButton.addEventListener('click', async () => {
+  clearTimeout(reset);
+  let copied = false;
+  try { await navigator.clipboard.writeText(promptField.value); copied = true; }
+  catch {
+    promptField.focus();
+    promptField.select();
+    try { copied = document.execCommand('copy'); } catch {}
+  }
+  copyButton.textContent = copied ? 'Copied' : 'Selected';
+  copyStatus.textContent = copied ? 'Prompt copied.' : 'Text selected. Press Control+C or Command+C to copy.';
+  reset = setTimeout(clearFeedback, 1500);
+});
+</script>
+</body>
+</html>

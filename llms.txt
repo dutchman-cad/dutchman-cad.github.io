@@ -1,0 +1,97 @@
+# Dutchman CAD
+
+> Dutchman CAD is the project; Dutchman Convert is its desktop app and command-line converter. It converts native CAD designs to SolidCraft, keeping feature history where supported and showing the user what was kept, changed or lost. It also writes FreeCAD documents. Dutchman is Rust, licensed Apache-2.0; native decoding is done by cadmpeg.
+
+Start with the four website levels below. Ask the person which level they want, then work through the earlier levels as needed and stop at their choice. A local assistant can run commands; a remote assistant should coach using reviewed anonymous reports only. Never upload a user's original design or private report to an AI service. Ask before sending a report, posting an issue or opening a PR; let the person review exactly what will be shared. Nothing is sent to the team automatically.
+
+Privacy: use the person's own files locally. Never attach the original design to a public issue. Do not share employer or customer files, or models downloaded from libraries. Keep report-key.json, local-key.json, salts, ordinary logs, journals, printed results and per-file JSON reports private: they can contain names and paths. Share only reviewed anonymous reports, code, and synthetic reproductions rebuilt from scratch that reproduce and are free to share. A body copied from an original remains private. Shared synthetic files need a STEP export and a public licence such as CC0. Never copy private geometry, dimensions or names into tests.
+
+A private DM to Dutchy on Discord is a separate, voluntary route: the person may choose to send a design of their own they have the right to send, with a STEP export of the exact same design. Such files are private by default and used only to fix the converter. An agent must not upload them on the person's behalf.
+
+Report on Dutchman first, even if the cause is upstream in cadmpeg or SolidCraft. The Dutchman team routes the fix and follows up when a Dutchman release includes it.
+
+Website tier 1 — Use it. Install the latest stable release, convert as many of your own files as you can, and inspect results in SolidCraft. Run from a working folder outside the input library:
+
+```sh
+dutchman --version
+dutchman convert-all --out-dir converted ./my-designs
+dutchman doctor ./my-designs --out checked
+```
+
+Replace ./my-designs with your input folder. convert-all searches subfolders; doctor checks a folder, diagnoses failing designs and groups repeated findings. Keep output folders outside the input library. Use fresh output paths for a new run; rerun with the same journal/output to resume as the library guide describes. SolidCraft verification is recommended: install a current SolidCraft and let Dutchman find its command-line program, or set SOLIDCRAFT_CLI to that program's path. Do not claim that an unchecked result is verified.
+
+Website tier 2 — Report it. Make and review an anonymous report:
+
+```sh
+dutchman convert-all --out-dir converted --report-anon report-anon.json <files>
+```
+
+Replace <files> with one or more files or folders. Use fresh output paths. Review report-anon.json before choosing to share it: it contains counts and causes without names, paths or geometry. If a name appears, omit that part and report the privacy bug. Open one Dutchman issue per distinct cause using the Library test report form, or A file didn't convert for one file. Include the format, source program/version, cause/code, stage, upstream, counts, a few anonymous file ids and the report's versions block copied verbatim (including nulls). Also include dutchman --version and solidcraft-cli --version output, or "none" if SolidCraft isn't installed. Use the installed tool's full path or SOLIDCRAFT_CLI when needed. Get the source program/version from reported metadata or the source app; ask once if absent. If the exact build is unknown, state the program, desktop or web, and the years the files are from.
+
+Website tier 3 — Diagnose it with your AI. Read the existing failing file's report locally before rerunning. To make a minimum-reproduction kit:
+
+```sh
+dutchman repro part.f3d --out original-reproduction
+dutchman repro small.f3d --out small-reproduction
+```
+
+Use actual local file names and a fresh output folder for every trial. Read kit/anonymous.json and kit/next-steps.md. Keep kit/local-key.json local; a remote assistant must not receive it or any private report/envelope paths. If the kit says no_failure_to_reproduce, the conversion succeeded; stop rather than inventing a failure. Coach the person to rebuild a small synthetic design by hand in the source program, using generic shapes and simple public dimensions. Compare the failure stage and complete finding-code set in both anonymous.json files; counts may shrink. A broad category without structured codes is only a candidate match. Share a rebuilt reproduction only if it reproduces and the person is free to share it, with its STEP export and a public licence. Trace native decode failures in cadmpeg, mapping/writing failures in Dutchman, and verification failures in SolidCraft; do not invent a decode failure when cadmpeg passes.
+
+Website tier 4 — Fix it and open a PR. Read Dutchman's AGENTS.md and CONTRIBUTING.md on current main before changing code. Fork and branch from main, keep the PR to one topic, use synthetic regression tests with recorded provenance, update affected docs and skills, and add a changelog.d/<short-name>.md fragment (do not edit CHANGELOG.md). Rust 1.88 or newer is required. From the Dutchman repository root:
+
+```sh
+cargo build --release
+scripts/solidcraft-window.sh --print
+python3 scripts/check-version-gates.py --base HEAD
+python3 -m unittest discover -s scripts/tests -v
+cargo fmt --all --check
+cargo clippy --workspace --all-targets --locked -- -D warnings
+cargo test --workspace --locked
+python3 scripts/changelog.py check
+python3 scripts/changelog.py preview
+```
+
+AGENTS.md requires the formatting, Clippy and test checks before every commit. Follow the current source docs for platform-specific checks and SolidCraft round trips. Keep default conversion output unchanged unless a change is opt-in; preserve existing writer checks and the SolidCraft opens-in floor. Never alter golden files or placement expectations just to pass tests. Use public information and synthetic files only, without vendor SDK samples, decompiled binaries or confidential material. Native byte decoding belongs in cadmpeg, not Dutchman. Keep a Dutchman PR depending on an upstream fix in draft until that fix is merged and Dutchman's pin includes it. Follow the destination repo's rules for upstream work, including its own legal and contribution requirements; never sign a declaration for the user. Open the PR against main under the person's own account after review, include checks and issue/upstream links, and make sure CI passes.
+
+The four website tiers above are entry levels from using the app to a PR. The repository's "Want to go further?" section separately numbers four steps AFTER reporting: minimal synthetic reproduction, diagnosis in cadmpeg, an upstream fix, and a Dutchman PR when needed. Do not confuse the two numbering schemes; consult that guide for the full upstream procedure.
+
+The source guidance below was checked against Dutchman main at 082ad08a6c24f11d2ebdba70b789ef697233b107 on 2026-11-19. Read the current main documents for changes before acting; they are authoritative for repository work.
+
+## Start here
+
+- [Contribution page](https://dutchmancad.xyz/contribute/): Four website levels and a copyable, tier-specific prompt.
+- [Install guide](https://raw.githubusercontent.com/dutchman-cad/dutchman/main/docs/install.md): Desktop apps, release archives, command-line installation and included local guidance.
+- [Latest release](https://github.com/dutchman-cad/dutchman/releases/latest): Stable downloads and release notes.
+- [SolidCraft](https://solidcraft.io): The product in which to open and check converted designs.
+- [Discord](https://discord.gg/yTcseBEdeu): Ask questions, DM Dutchy privately, or type /volunteer for fixtures.
+
+## Use and report
+
+- [Testing your library](https://github.com/dutchman-cad/dutchman/blob/main/docs/testing-your-library.md#2-run-the-batch): Batch commands, output folders and resumable journals.
+- [Library guide, plain Markdown](https://raw.githubusercontent.com/dutchman-cad/dutchman/main/docs/testing-your-library.md): Complete local testing, privacy, reporting and assistant prompts.
+- [Check a folder with doctor](https://github.com/dutchman-cad/dutchman/blob/main/docs/testing-your-library.md#check-a-folder-with-doctor): Diagnosis, anonymous report.json and private outputs.
+- [What is safe to share](https://github.com/dutchman-cad/dutchman/blob/main/docs/testing-your-library.md#4-what-is-safe-to-share): Reports versus keys, logs, designs and journals.
+- [Report what you found](https://github.com/dutchman-cad/dutchman/blob/main/docs/testing-your-library.md#5-report-what-you-found): One Dutchman issue per cause and the three required versions.
+- [Reporting a problem](https://github.com/dutchman-cad/dutchman/blob/main/CONTRIBUTING.md#reporting-a-problem): Anonymous report command, privacy and report-on-Dutchman-first rule.
+- [Private file sharing](https://github.com/dutchman-cad/dutchman/blob/main/README.md#report-a-file-that-fails-or-converts-wrong): Voluntary private DM of an own design and its STEP export.
+- [Dutchman issue forms](https://github.com/dutchman-cad/dutchman/issues/new/choose): Library test report and other forms.
+- [A file didn't convert](https://github.com/dutchman-cad/dutchman/issues/new?template=file-did-not-convert.yml): Single-file issue form; do not attach the original design.
+
+## Diagnose and fix
+
+- [AGENTS.md](https://github.com/dutchman-cad/dutchman/blob/main/AGENTS.md): Repository layout, checks and contributor rules.
+- [AGENTS.md, plain Markdown](https://raw.githubusercontent.com/dutchman-cad/dutchman/main/AGENTS.md): Instructions for an assistant working in Dutchman.
+- [CONTRIBUTING.md](https://github.com/dutchman-cad/dutchman/blob/main/CONTRIBUTING.md): Build, test, PR, clean-room and fixture rules.
+- [CONTRIBUTING.md, plain Markdown](https://raw.githubusercontent.com/dutchman-cad/dutchman/main/CONTRIBUTING.md): The complete contribution rules.
+- [Minimum-reproduction guide](https://raw.githubusercontent.com/dutchman-cad/dutchman/main/docs/minimum-reproduction.md): Make the kit, rebuild and compare; only reviewed anonymous reports and matching synthetic files may be shared.
+- [Rebuild and compare](https://github.com/dutchman-cad/dutchman/blob/main/docs/minimum-reproduction.md#rebuild-and-compare): Match the stage and full finding-code set.
+- [Detailed assistant prompt](https://github.com/dutchman-cad/dutchman/blob/main/docs/testing-your-library.md#let-your-own-ai-make-a-minimum-reproduction): Local or remote coaching without uploading originals or posting automatically.
+- [Full report-to-fix workflow](https://github.com/dutchman-cad/dutchman/blob/main/docs/testing-your-library.md#want-to-go-further): The repo's separate post-report tiers, cadmpeg commands, upstream contribution rules and Dutchman finish.
+- [Building and checking](https://github.com/dutchman-cad/dutchman/blob/main/CONTRIBUTING.md#building-and-checking): Current build requirements and CI commands.
+- [Pull request rules](https://github.com/dutchman-cad/dutchman/blob/main/CONTRIBUTING.md#pull-requests): Branching, changelog fragments, tests, docs and dependencies.
+- [Clean-room rule](https://github.com/dutchman-cad/dutchman/blob/main/CONTRIBUTING.md#clean-room-rule): Public information, synthetic tests and no third-party designs.
+
+## Other ways to help
+
+- [Fixture recipes](https://dutchmancad.xyz/fixtures/): Make known synthetic files in your CAD program. Join Discord and type /volunteer for a personal portal link; the latest recipe booklet PDF is linked in that portal.
+- [Stress corpus: take part](https://dutchmancad.xyz/stress-corpus/#take-part): Claim a batch and check results in SolidCraft and FreeCAD.
