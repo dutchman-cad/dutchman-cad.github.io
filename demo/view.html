@@ -42,7 +42,7 @@ fetch('gallery.json').then(r => { if (!r.ok) throw new Error(); return r.json();
     else { get('download').removeAttribute('download'); get('download').textContent = 'Download coming soon'; }
     get('status').hidden = true; get('design').hidden = false; return;
   }
-  const designURL = new URL(entry.design, 'https://dutchman-cad.github.io/demo/').href;
+  const designURL = new URL(entry.design, 'https://dutchmancad.xyz/demo/').href;
   get('viewer').title = entry.title + ' in SolidCraft';
   const load = () => { get('gate').hidden = true; get('still').hidden = true; get('viewer').hidden = false; get('viewer').src = 'app/?embed&open=' + designURL; };
   if (entry.heavy) {
