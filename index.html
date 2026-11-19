@@ -6,6 +6,8 @@
 <title>Dutchman Convert — bring your CAD history to SolidCraft</title>
 <meta name="description" content="Open Fusion, Inventor, SolidWorks and other CAD designs in SolidCraft. Dutchman Convert carries over feature history where supported and shows you what could not convert.">
 <link rel="canonical" href="https://dutchmancad.xyz/">
+<link rel="help" href="contribute/">
+<link rel="describedby" href="llms.txt" type="text/plain">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Dutchman CAD">
 <meta property="og:title" content="Dutchman Convert — bring your CAD history to SolidCraft">
@@ -53,13 +55,14 @@
 @media(max-width:650px){.install-grid{grid-template-columns:minmax(0,1fr)}}
 
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+footer .agent-guide{flex-basis:100%}footer .agent-guide a{margin-left:0}
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <nav class="nav" aria-label="Main navigation">
   <a class="brand" href="./"><span class="mark" aria-hidden="true"></span>Dutchman CAD</a>
-  <div class="nav-links"><a href="#formats">Formats</a><a href="#help">Help out</a><a href="https://github.com/dutchman-cad" target="_blank" rel="noopener">GitHub ↗</a><a href="https://discord.gg/yTcseBEdeu" target="_blank" rel="noopener">Discord ↗</a></div>
+  <div class="nav-links"><a href="#formats">Formats</a><a href="#help">Help out</a><a href="contribute/" target="_blank" rel="noopener">Contribute</a><a href="https://github.com/dutchman-cad" target="_blank" rel="noopener">GitHub ↗</a><a href="https://discord.gg/yTcseBEdeu" target="_blank" rel="noopener">Discord ↗</a></div>
 </nav>
 <main id="main">
 <header class="hero">
@@ -155,7 +158,7 @@
   </div>
 </section>
 <section class="section" id="help" aria-labelledby="help-title">
-  <div class="section-head"><h2 id="help-title">Help make it better</h2><p>A file that fails is a place to start.</p></div>
+  <div class="section-head"><h2 id="help-title"><a href="contribute/" target="_blank" rel="noopener">Help make it better</a></h2><p>A file that fails is a place to start.</p></div>
   <div class="help-grid">
     <article class="help"><span class="number">01 / SHARE A FILE</span><h3>DM Dutchy on Discord</h3><p>Private by default. Send the native file and a STEP export if you have one. Only the Dutchman team sees it.</p><a href="https://discord.gg/yTcseBEdeu" target="_blank" rel="noopener">Join Discord →</a></article>
     <article class="help"><span class="number">02 / CHECK LOCALLY</span><h3>Check a folder</h3><p>Find conversion problems in a folder on your own computer. Your files stay with you.</p><code>dutchman doctor</code></article>
@@ -176,6 +179,7 @@
   <p>Dutchman CAD</p>
   <nav aria-label="Footer"><a href="https://github.com/dutchman-cad" target="_blank" rel="noopener">GitHub ↗</a><a href="https://discord.gg/yTcseBEdeu" target="_blank" rel="noopener">Discord ↗</a></nav>
   <p class="licence">Dutchman Convert · <a href="https://github.com/dutchman-cad/dutchman/blob/main/LICENSE" target="_blank" rel="noopener">Apache-2.0 licence</a></p>
+  <p class="agent-guide">For AI agents: <a href="llms.txt" target="_blank" rel="noopener">/llms.txt</a></p>
 </footer>
 <script>
 // Copy the literal command, preserving its spaces and punctuation.
