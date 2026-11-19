@@ -1,16 +1,21 @@
 # Landing page sources
 
-- `railcore-results-light.png` and `railcore-results-dark.png`: complete native
-  567 × 361 app-card crops `(729, 104, 1296, 465)` from a fresh RailCore
-  bed conversion. The `-mobile.png` variants are 428 × 433 crops
-  `(32, 359, 460, 792)` captured after resizing the same app window.
-  No text, pixels or counts were retouched or rescaled. Desktop uses native image dimensions;
-  mobile uses the same result reflowed in a narrower real app window.
-- `railcore-solidcraft.png`: unretouched native 570 × 327 viewport crop
-  `(292, 159, 862, 486)` from the original full-printer capture.
-  This is the newly converted full printer open in a private SolidCraft
-  0.44.1 window, rather than a preview inside Dutchman Convert. The page
-  labels the full printer view and its bed's conversion card separately.
+- `railcore-solidcraft.webp` and `railcore-solidcraft-mobile.webp`: new real
+  SolidCraft 0.44.1 viewport captures of the converted full printer. The
+  camera was zoomed out and panned in the app, leaving the complete printer
+  above the bottom toolbar and space beside it for the result window.
+  Desktop is a native 1008 × 630 crop `(256, 159, 1264, 789)`; mobile is a
+  native 720 × 630 crop `(256, 159, 976, 789)` of the same capture. WebP
+  compression is lossless, with no painting, retouching or resampling.
+- `railcore-summary-light.png` and `railcore-summary-dark.png`: native
+  428 × 311 crops `(0, 0, 428, 311)` of the mobile result captures below,
+  retaining the title, controls, summary and losses. Desktop displays these
+  at 400 CSS pixels wide, keeping the 14 px body text above 13 px.
+- `railcore-results-light-mobile.png` and `railcore-results-dark-mobile.png`:
+  the complete 428 × 433 result card, captured after resizing the real app
+  window. Original capture bounds: `(32, 359, 460, 792)`. Mobile displays
+  the whole card below the printer, without overlap; at a 400 px viewport
+  its body text is just over 13 px. No text, pixels or counts were retouched.
 
 The input archive is [RailCore II 300ZL - Nov 2019.f3z](https://github.com/railcore/parts/blob/master/F3Z/RailCore%20II%20300ZL%20-%20Nov%202019.f3z),
 from the public RailCore/parts repository. SHA-256:
