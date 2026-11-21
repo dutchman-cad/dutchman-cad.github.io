@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Dutchman Convert</title>
+<script>
+// Dynamic short links (GitHub Pages serves this page for any unknown path):
+//   /releases/0.3.0 or /releases/v0.3.0 -> that release; /issues/N, /pull/N -> that issue or PR;
+//   /github/<path> -> that path in dutchman-cad/dutchman. Anything else shows the not-found note below.
+(function () {
+  var R = "https://github.com/dutchman-cad/dutchman";
+  var p = location.pathname.replace(/\/+$/, "");
+  var m, to = null;
+  if ((m = p.match(/^\/releases\/v?(\d+\.\d+\.\d+(?:-[\w.]+)?)$/))) to = R + "/releases/tag/v" + m[1];
+  else if ((m = p.match(/^\/(issues|pull)\/(\d+)$/))) to = R + "/" + m[1] + "/" + m[2];
+  else if ((m = p.match(/^\/github\/(.+)$/))) to = R + "/" + m[1];
+  if (to) location.replace(to + location.search + location.hash);
+})();
+</script>
+<style>body{font:16px system-ui,sans-serif;margin:3rem 1rem;color:#1d2a25;background:#f4f5f3}@media (prefers-color-scheme:dark){body{color:#e6ece9;background:#141a17}a{color:#7fd3b5}}</style>
+</head><body>
+<p>That page isn't here. Try <a href="/">Dutchman Convert</a>, <a href="/download">the latest download</a> or <a href="/releases">all releases</a>.</p>
+</body></html>
