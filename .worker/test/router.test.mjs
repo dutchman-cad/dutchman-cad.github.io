@@ -52,8 +52,8 @@ test("fetch: 301 with Location; proxy rewrites Pages redirects back to the apex 
   assert.equal(red.status, 301); assert.equal(red.headers.get("location"), "https://discord.gg/yTcseBEdeu");
   const orig = globalThis.fetch;
   try {
-    globalThis.fetch = async (url) => url === `${PAGES}/contribute`
-      ? new Response(null, { status: 301, headers: { location: `${PAGES}/contribute/` } })
+    globalThis.fetch = async (url) => url.replace(/[?&]_w=2$/, "") === `${PAGES}/contribute`
+      ? new Response(null, { status: 301, headers: { location: `${PAGES}/contribute/?_w=2` } })
       : new Response("nf", { status: 404, headers: { "content-type": "text/html", "x-github-request-id": "1" } });
     const c = await worker.fetch(new Request(A + "/contribute"));
     assert.equal(c.status, 301); assert.equal(c.headers.get("location"), "https://dutchmancad.xyz/contribute/");
