@@ -7,4 +7,6 @@ compatibility_date = "2026-11-01"
 workers_dev = false
 routes = [
   { pattern = "next.dutchmancad.xyz", custom_domain = true },
+  { pattern = "dutchmancad.xyz", custom_domain = true },
+  { pattern = "www.dutchmancad.xyz", custom_domain = true },
 ]

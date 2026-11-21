@@ -38,12 +38,21 @@ export default {
     const r = route(req.url);
     if (r.redirect) return new Response(null, { status: 301, headers: { location: r.redirect, "cache-control": "public, max-age=3600" } });
     if (req.method !== "GET" && req.method !== "HEAD") return new Response("Method not allowed", { status: 405, headers: { allow: "GET, HEAD" } });
-    const res = await fetch(r.proxy, { method: req.method, headers: { "accept": req.headers.get("accept") || "*/*",
-      "accept-encoding": req.headers.get("accept-encoding") || "", "user-agent": "dutchman-site-worker" }, redirect: "manual" });
+    // A version marker in the upstream URL gives a fresh edge-cache entry (GitHub Pages ignores the query).
+    const upstream = r.proxy + (r.proxy.includes("?") ? "&" : "?") + "_w=2";
+    const res = await fetch(upstream, { method: req.method, headers: { "accept": req.headers.get("accept") || "*/*",
+      "accept-encoding": req.headers.get("accept-encoding") || "", "user-agent": "dutchman-site-worker" }, redirect: "manual",
+      // Never cache GitHub redirects at the edge (11-21: a 301 cached from before the cutover looped /og.png).
+      cf: { cacheTtlByStatus: { "200-299": 600, "300-399": 0, "404": 60, "500-599": 0 } } });
     const h = new Headers(res.headers);
     // GitHub Pages redirects (e.g. /contribute -> /contribute/) name the github.io host; point them back at the apex.
     const loc = h.get("location");
-    if (loc && loc.startsWith(PAGES)) h.set("location", `https://${APEX}${loc.slice(PAGES.length)}`);
+    if (loc && loc.startsWith(PAGES)) {
+      // Drop our cache-version marker so it never shows in a visitor's address bar.
+      const out = new URL(`https://${APEX}${loc.slice(PAGES.length)}`);
+      out.searchParams.delete("_w");
+      h.set("location", out.toString());
+    }
     for (const k of ["x-github-request-id", "x-fastly-request-id", "x-served-by", "x-cache", "x-cache-hits", "x-timer", "via"]) h.delete(k);
     return new Response(res.body, { status: res.status, statusText: res.statusText, headers: h });
   },
