@@ -19,7 +19,7 @@
     "card": {
       "title": "RailCore II 300ZL, live in your browser",
       "line": "A complete 3D printer from Fusion: 379 parts placed, 153 features editable.",
-      "credit": "RailCore® II 300ZL by J. Steve White and Tony Akens (CC BY 3.0)"
+      "credit": "RailCore® II 300ZL by J. Steve White and Tony Akens (CC BY-SA 4.0)"
     },
     "title": "RailCore II 300ZL",
     "source_app": "Fusion",
@@ -29,8 +29,8 @@
     "thumb": "demo/thumbs/railcore.png",
     "credit": {
       "author": "RailCore® II 300ZL by J. Steve White and Tony Akens",
-      "licence": "CC BY 3.0",
-      "licence_link": "https://creativecommons.org/licenses/by/3.0/",
+      "licence": "CC BY-SA 4.0",
+      "licence_link": "https://creativecommons.org/licenses/by-sa/4.0/",
       "link": "https://github.com/railcore/parts"
     },
     "notice": "Converted from the original Fusion design to SolidCraft by Dutchman Convert; the design itself is unchanged.",
