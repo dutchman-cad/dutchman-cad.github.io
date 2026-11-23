@@ -51,23 +51,19 @@ contributors credited in the source repository, under CC BY-SA 4.0.
 The viewport and result card both refer to the complete printer. The card PNGs use lossless compression. Model images use high-quality WebP;
 only real viewport captures supply their contents.
 
-- `formats-0.2.10.json`: output of `dutchman formats --json` from the Linux x86_64
-  binary in the GitHub v0.2.10 release. The archive was checked against the
+- `formats-0.3.0.json`: output of `dutchman formats --json` from the Linux x86_64
+  binary in the GitHub v0.3.0 release. The archive was checked against the
   release's SHA-256 checksum. Labels use both `level` and `converts`; levels
-  alone do not promise feature-history support. Onshape is separate preview
-  information supplied for the upcoming 0.3.0 release.
+  alone do not promise feature-history support. The 0.3.0 report adds the
+  Onshape bundle and lists NX as converting geometry.
 
-NX geometry support for 0.3.0 is based on the review update that it has merged
-on main; the archived 0.2.10 format report remains unchanged.
-
-Round 3 support audit: reran `formats --json` from the 0.2.10 release binary;
-it matches the archived report byte for byte. Cross-checked against
-`crates/dutchman/src/formats.rs` and `docs/formats.md` at tag `v0.2.10`.
+Support audit: ran `formats --json` from the 0.3.0 release binary. Cross-checked
+against `docs/formats.md` at tag `v0.3.0`.
 `.FCStd` is an input, including geometry, components, and mapped history and
 joints. Fusion and Inventor part history is conditional on feature mapping.
 SolidWorks parts carry geometry; both Inventor and SolidWorks assemblies read
 placed parts and sub-assemblies from the project. CATIA, Rhino, Creo View,
-ACIS and STEP carry geometry. Creo and NX are not converted in 0.2.10; IGES
+ACIS and STEP carry geometry. Creo and NX are not converted in 0.3.0; IGES
 must be imported directly in SolidCraft. NX and Onshape future-release labels
 are kept separate from current support.
 
@@ -75,7 +71,5 @@ The support table groups Fusion archives, Inventor parts/assemblies, and
 SolidWorks parts/assemblies into one row per program. Partial history means
 where mapped; components and placed parts populate the Assemblies column.
 Geometry-only entries do not claim history or placed assemblies. Onshape
-capabilities are n/a because the 0.2.10 report does not list them. NX shape
-is marked Yes only alongside its explicit coming-in-0.3.0 status, based on
-the review's merged-main update; the archived report is unchanged. IGES is
+is one offline Part Studio bundle with partial history. IGES is
 not converted by Dutchman and instead points to SolidCraft's own importer.
