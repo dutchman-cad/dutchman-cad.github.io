@@ -45,7 +45,14 @@ fetch('gallery.json').then(r => { if (!r.ok) throw new Error(); return r.json();
   }
   const designURL = new URL(entry.design, 'https://dutchmancad.xyz/demo/').href;
   get('viewer').title = entry.title + ' in SolidCraft';
-  const load = () => { get('gate').hidden = true; get('still').hidden = true; get('viewer').hidden = false; get('viewer').src = 'app/?embed&open=' + designURL; };
+  // The web app's .wasm is served by the site's Worker from a release asset; until that is live, say so instead of showing a broken viewer.
+  const viewerUp = () => fetch('app/wasm-asset.json').then(r => r.json()).then(a => fetch('app/' + a.file, { method: 'HEAD' }))
+    .then(r => r.ok && /wasm/.test(r.headers.get('content-type') || '')).catch(() => false);
+  const load = async () => {
+    get('gate').hidden = true;
+    if (!await viewerUp()) { get('viewer').hidden = true; get('still').src = '../' + entry.thumb; get('still').alt = entry.title; get('still').hidden = false; get('hint').textContent = 'The viewer is updating, try again in a few minutes.'; get('hint').hidden = false; return; }
+    get('still').hidden = true; get('viewer').hidden = false; get('viewer').src = 'app/?embed&open=' + designURL;
+  };
   if (entry.heavy) {
     get('viewer').hidden = true;
     get('still').src = '../' + entry.thumb; get('still').alt = entry.title + ' in SolidCraft'; get('still').hidden = false;
