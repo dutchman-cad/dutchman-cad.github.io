@@ -28,7 +28,7 @@
 // Unbuilt (VERSION "dev", as debug builds get it), the worker retires: it drops what a release
 // build kept and unregisters, so `trunk serve` after `trunk serve --release --no-autoreload`
 // shows the development build. Deploying this file unbuilt switches the worker off for everyone.
-/* @build */ const VERSION = "0.28.0-9c0098c380b636a0", FILES = [{"file":"icons/256x256/io.tangencylabs.solidcraft.png","sha256":"71a3e492720571cf572faa51d86a7ff75e9d7dea0916142b51de835bf857c5af"},{"file":"icons/32x32/io.tangencylabs.solidcraft.png","sha256":"894552719c6bf8aa91f9d3ab3f1cb61836708f9ba00daf0324175ac82f16dfab"},{"file":"icons/512x512/io.tangencylabs.solidcraft.png","sha256":"84fde8ef270f5b32afa2d661749b4778a205e7df980dd67795c10f7f4a69e15d"},{"file":"index.html","sha256":"a2fd6e50f36970d4cb28de3515e8b784c3168492d9264fc5e9ea24e7676a8cb9"},{"file":"loading-fa23566dd89fa92b.css","sha256":"6beeebe803106340480ebee6554cf7c1c33a2ce0410bcb42d7fd4f78e3dee7f2"},{"file":"loading-logo.svg","sha256":"31d87162bb6a5a189bf60575981a1ef24c245d209783d9ad08b8318f66146e3d"},{"file":"manifest.webmanifest","sha256":"dfe478ab0f471db755846239088ce3e0231057c119f763b9a5309d2c5f6e8a9b"},{"file":"solidcraft-web-b517fa56d6287dbf.js","sha256":"398163d60df70913f42f5d530c2c1a7c4d8b62ebfbf14bb925ba46dee5b1dfbb"},{"file":"solidcraft-web-b517fa56d6287dbf_bg.wasm","sha256":"c9dff8c4024b7bf5332c208888c0f5cedbf839a6f4c4c5f08db4859e3be82c7e"}];
+/* @build */ const VERSION = "0.46.2-fab1f2313a807e02", FILES = [{"file":"channel-storage.txt","sha256":"ddb9a0376068f8028c645b775315f7afd0e18e78a612cf81ef992b84696fc2ae"},{"file":"icons/256x256/io.tangencylabs.solidcraft.png","sha256":"71a3e492720571cf572faa51d86a7ff75e9d7dea0916142b51de835bf857c5af"},{"file":"icons/32x32/io.tangencylabs.solidcraft.png","sha256":"894552719c6bf8aa91f9d3ab3f1cb61836708f9ba00daf0324175ac82f16dfab"},{"file":"icons/512x512/io.tangencylabs.solidcraft.png","sha256":"84fde8ef270f5b32afa2d661749b4778a205e7df980dd67795c10f7f4a69e15d"},{"file":"index.html","sha256":"476bf37ea02d1d8d4f8a220e82f97c727025d98d1d3871d7d3528a21d2088a2b"},{"file":"loading-fa23566dd89fa92b.css","sha256":"6beeebe803106340480ebee6554cf7c1c33a2ce0410bcb42d7fd4f78e3dee7f2"},{"file":"loading-logo.svg","sha256":"31d87162bb6a5a189bf60575981a1ef24c245d209783d9ad08b8318f66146e3d"},{"file":"manifest.webmanifest","sha256":"dfe478ab0f471db755846239088ce3e0231057c119f763b9a5309d2c5f6e8a9b"},{"file":"solidcraft-web-8af3015052070058.js","sha256":"5822d5edb19a671878346e1e787fd9dc859cc7044691ebe8caab7d410ed1c606"},{"file":"solidcraft-web-8af3015052070058_bg.wasm","sha256":"c39d1e6ca582bb2bcdc8cf6b5e345a7096588f2490f333d21c6e2cb6e32b9410"}];
 const RETIRE = VERSION === "dev";
 
 const PATH = new URL(self.registration.scope).pathname;
@@ -44,8 +44,10 @@ const UPDATE_TIMEOUT_MS = 20000;
 const COMPLETE = "build-complete";
 /** The entry that marks a build replaced by a newer worker. */
 const RETIRED = "build-retired";
-/** A page remembered this recently may still be loading (not yet listed among the clients). */
-const PAGE_LOADING_MS = 30 * 1000;
+/** A page remembered this recently may still be loading (not yet listed among the clients). A slow
+ * device can take minutes between the launch's answer and the page appearing; a live page's record is
+ * kept for as long as it is listed. */
+const PAGE_LOADING_MS = 10 * 60 * 1000;
 
 const url = (file) => new URL(file, self.registration.scope).href;
 const has = (name, entry) => caches.match(url(entry), { cacheName: name }).then(Boolean);
@@ -102,10 +104,13 @@ async function started(id, build) {
   await (await caches.open(PAGES)).put(pageEntry(id), new Response(record));
 }
 
-/** The build a page started; a page started before it was remembered gets this worker's. */
+/**
+ * The build a page started, or null when it was not remembered. Never this worker's build instead:
+ * after an update that is another build than the page's, and its files would be mixed into the page.
+ */
 async function startedBy(id) {
   const response = id ? await caches.match(pageEntry(id), { cacheName: PAGES }) : null;
-  return response ? (await response.json()).build : CACHE;
+  return response ? (await response.json()).build : null;
 }
 
 /** The builds open pages use (pages closed since are forgotten). */
@@ -143,11 +148,22 @@ self.addEventListener("activate", (event) => {
         for (const name of await caches.keys()) if (name.startsWith(CACHE_PREFIX) || name === PAGES) await caches.delete(name);
         return self.registration.unregister();
       }
-      for (const name of await caches.keys()) {
-        if (name.startsWith(CACHE_PREFIX) && name !== CACHE) await (await caches.open(name)).put(url(RETIRED), new Response(""));
-      }
-      await sweep();
+      const older = (await caches.keys()).filter((name) => name.startsWith(CACHE_PREFIX) && name !== CACHE);
+      // Claim first: from the moment this worker is the active one, a page the old worker controlled has
+      // no controller until it is claimed, and a request it makes then goes straight to the network, which
+      // serves the newest build, not the page's. Nothing slow goes before this.
       await self.clients.claim();
+      for (const name of older) await (await caches.open(name)).put(url(RETIRED), new Response(""));
+      await sweep();
+      // With no earlier build kept, the pages open when the first worker takes over came from the
+      // network, and get their files from it. After an update a page with no record is not
+      // assumed to be anything: its record may only be late, and the network now serves a newer
+      // build than the page's.
+      if (!older.length) {
+        for (const client of await self.clients.matchAll({ includeUncontrolled: true })) {
+          if (!(await startedBy(client.id).catch(() => null))) await started(client.id, NETWORK).catch(() => {});
+        }
+      }
     })(),
   );
 });
@@ -221,7 +237,12 @@ async function launchOrKept(event) {
 
 /** A page's files come from the build it started, else the network. */
 async function asset(event) {
-  const build = await startedBy(event.clientId).catch(() => CACHE);
+  const build = await startedBy(event.clientId).catch(() => null);
+  // A page whose build is not known, or whose build's copy is gone, would get another build's files
+  // (a mixed page that never starts). It fails visibly instead: reloading starts a whole build.
+  if (!build || (build !== NETWORK && !(await caches.has(build)))) {
+    return new Response("This page's version of the app is no longer kept. Reload the page.", { status: 503, headers: { "Content-Type": "text/plain" } });
+  }
   const kept = build === NETWORK ? null : await caches.match(event.request, { cacheName: build, ignoreSearch: true });
   return kept || fetch(event.request);
 }
