@@ -69,50 +69,5 @@
       "line": "A complete 3D printer from Fusion: 1,683 parts, each in its own colour.",
       "credit": "Voron 2.4r2 by Voron Design (GPL-3.0). Not affiliated with Voron Design."
     }
-  },
-  {
-    "id": "history-block",
-    "title": "A part with its feature history",
-    "source_app": "FreeCAD",
-    "what": "A sketch with its dimensions and constraints, a pad, and a fillet, with verified editable history.",
-    "stats": "3 editable history steps · verified",
-    "design": "designs/history-block.sc",
-    "thumb": "demo/thumbs/history-block.png",
-    "credit": {
-      "author": "Dutchman CAD fixtures · FreeCAD 1.1.4 / F03a",
-      "licence": "CC0",
-      "link": "https://github.com/dutchman-cad/fixtures/blob/main/files/freecad/1.1.4/F03a.FCStd"
-    },
-    "hint": "In the full app, double-click the extrude in the History bar, change its length, and the part rebuilds. Geometry was verified against the source."
-  },
-  {
-    "id": "counterbore-block",
-    "title": "Counterbored block",
-    "source_app": "FreeCAD",
-    "what": "Two sketches, a pad, and a counterbored hole, with verified editable history.",
-    "stats": "4 editable history steps · verified",
-    "design": "designs/counterbore-block.sc",
-    "thumb": "demo/thumbs/counterbore-block.png",
-    "credit": {
-      "author": "Dutchman CAD fixtures · FreeCAD 1.1.4 / F04b",
-      "licence": "CC0",
-      "link": "https://github.com/dutchman-cad/fixtures/blob/main/files/freecad/1.1.4/F04b.FCStd"
-    },
-    "hint": "In the full app, inspect Pad and Hole in the History bar. Geometry was verified against the source."
-  },
-  {
-    "id": "raised-pad",
-    "title": "Raised pad",
-    "source_app": "FreeCAD",
-    "what": "Two sketches and two additive extrudes, with verified editable history.",
-    "stats": "4 editable history steps · verified",
-    "design": "designs/raised-pad.sc",
-    "thumb": "demo/thumbs/raised-pad.png",
-    "credit": {
-      "author": "Dutchman CAD fixtures · FreeCAD 1.1.4 / F21a",
-      "licence": "CC0",
-      "link": "https://github.com/dutchman-cad/fixtures/blob/main/files/freecad/1.1.4/F21a.FCStd"
-    },
-    "hint": "In the full app, inspect Pad and EmbossPad in the History bar. Geometry was verified against the source; four parameters were renamed because their names repeat."
   }
 ]
