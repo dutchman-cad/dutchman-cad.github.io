@@ -67,7 +67,7 @@ footer .agent-guide{flex-basis:100%}footer .agent-guide a{margin-left:0}
 <main id="main">
 <header class="hero">
   <div>
-    <p class="eyebrow">Dutchman Convert / v0.3.0</p>
+    <p class="eyebrow">Dutchman Convert / <span id="latest-version">v0.3.0</span></p>
     <h1>Your designs.<br>Their history.<br><em>In SolidCraft.</em></h1>
     <p class="lead">Open your Fusion, Inventor, SolidWorks, Onshape… designs in SolidCraft, with their feature history.</p>
     <div class="actions">
@@ -106,7 +106,7 @@ footer .agent-guide{flex-basis:100%}footer .agent-guide a{margin-left:0}
 </header>
 <div class="downloads" aria-label="All downloads">
 <p><strong>Desktop apps:</strong> <a href="https://github.com/dutchman-cad/dutchman/releases/latest/download/dutchman-x86_64-pc-windows-msvc.msi">Windows MSI</a> <a href="https://github.com/dutchman-cad/dutchman/releases/latest/download/dutchman-macos-universal.dmg">macOS DMG</a> <a href="https://github.com/dutchman-cad/dutchman/releases/latest/download/dutchman-x86_64.AppImage">Linux x64 AppImage</a> <a href="https://github.com/dutchman-cad/dutchman/releases/latest/download/dutchman-aarch64.AppImage">Linux ARM64 AppImage</a></p>
-<p><strong>Archives:</strong> <a href="https://github.com/dutchman-cad/dutchman/releases/latest/download/dutchman-x86_64-pc-windows-msvc.zip">Windows ZIP</a> <a href="https://github.com/dutchman-cad/dutchman/releases/latest/download/dutchman-macos-universal.tar.gz">Mac universal</a> <a href="https://github.com/dutchman-cad/dutchman/releases/latest/download/dutchman-aarch64-apple-darwin.tar.gz">Mac Apple silicon</a> <a href="https://github.com/dutchman-cad/dutchman/releases/latest/download/dutchman-x86_64-apple-darwin.tar.gz">Mac Intel</a> <a href="https://github.com/dutchman-cad/dutchman/releases/latest/download/dutchman-x86_64-unknown-linux-gnu.tar.gz">Linux x64</a> <a href="https://github.com/dutchman-cad/dutchman/releases/latest/download/dutchman-aarch64-unknown-linux-gnu.tar.gz">Linux ARM64</a> <a href="https://github.com/dutchman-cad/dutchman/releases/download/v0.3.0/dutchman-bin-0.3.0-x86_64.pkg.tar.zst">Arch x64 package</a> <a href="https://github.com/dutchman-cad/dutchman/releases/latest" target="_blank" rel="noopener">Checksums &amp; release notes ↗</a></p>
+<p><strong>Archives:</strong> <a href="https://github.com/dutchman-cad/dutchman/releases/latest/download/dutchman-x86_64-pc-windows-msvc.zip">Windows ZIP</a> <a href="https://github.com/dutchman-cad/dutchman/releases/latest/download/dutchman-macos-universal.tar.gz">Mac universal</a> <a href="https://github.com/dutchman-cad/dutchman/releases/latest/download/dutchman-aarch64-apple-darwin.tar.gz">Mac Apple silicon</a> <a href="https://github.com/dutchman-cad/dutchman/releases/latest/download/dutchman-x86_64-apple-darwin.tar.gz">Mac Intel</a> <a href="https://github.com/dutchman-cad/dutchman/releases/latest/download/dutchman-x86_64-unknown-linux-gnu.tar.gz">Linux x64</a> <a href="https://github.com/dutchman-cad/dutchman/releases/latest/download/dutchman-aarch64-unknown-linux-gnu.tar.gz">Linux ARM64</a> <a id="arch-package" href="https://github.com/dutchman-cad/dutchman/releases/download/v0.3.0/dutchman-bin-0.3.0-x86_64.pkg.tar.zst">Arch x64 package</a> <a href="https://github.com/dutchman-cad/dutchman/releases/latest" target="_blank" rel="noopener">Checksums &amp; release notes ↗</a></p>
 </div>
 <section class="install" aria-labelledby="install-title">
   <h2 id="install-title">Install</h2>
@@ -208,6 +208,17 @@ document.querySelectorAll('.copy-command').forEach(button => {
     }, 1500);
   });
 });
+// The version label and the versioned Arch package follow the latest published release, so
+// nothing here needs bumping; the markup above is the fallback if the request fails.
+fetch('https://api.github.com/repos/dutchman-cad/dutchman/releases/latest', {headers: {Accept: 'application/vnd.github+json'}})
+  .then(r => r.ok ? r.json() : Promise.reject())
+  .then(rel => {
+    if (!/^v\d+\.\d+\.\d+$/.test(rel.tag_name)) return;
+    document.getElementById('latest-version').textContent = rel.tag_name;
+    const arch = (rel.assets || []).find(a => /^dutchman-bin-[\d.]+-x86_64\.pkg\.tar\.zst$/.test(a.name));
+    if (arch) document.getElementById('arch-package').href = arch.browser_download_url;
+  })
+  .catch(() => {});
 // Stable asset names follow the latest release; every build is also linked above.
 (() => {
   const platform = navigator.userAgentData?.platform || navigator.platform || '';
