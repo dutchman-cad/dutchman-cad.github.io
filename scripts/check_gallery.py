@@ -59,8 +59,16 @@ app = demo / "app"
 for needed in ("index.html", "LICENSE-MIT", "LICENSE-APACHE", "NOTICE"):
     if not (app / needed).is_file():
         problems.append(f"no demo/app/{needed}")
-if not list(app.glob("*_bg.wasm")):
-    problems.append("no wasm in demo/app")
+# The .wasm is over GitHub's file limit: a release asset, named by wasm-asset.json (also built from build.json's hash).
+try:
+    asset = json.loads((app / "wasm-asset.json").read_text())
+    listed = {f["file"]: f["sha256"] for f in json.loads((app / "build.json").read_text())["files"]}
+    if listed.get(asset["file"]) != asset["sha256"]:
+        problems.append("demo/app/wasm-asset.json does not match build.json")
+    if not str(asset["url"]).endswith("/" + asset["file"]) or "/releases/download/web-" not in asset["url"]:
+        problems.append("demo/app/wasm-asset.json: url is not a web-<version> release asset")
+except (OSError, ValueError, KeyError):
+    problems.append("no demo/app/wasm-asset.json")
 for problem in problems:
     print(problem)
 print(f"{len(entries)} gallery entries, {len(problems)} problems")

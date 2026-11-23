@@ -2,6 +2,8 @@
 // Usage: node scripts/check_demo_load.mjs [--out DIR] [--wait SECONDS] [--only ID] [--no-heavy | --heavy-only]
 // Heavy designs (a gallery entry with `heavy`, such as RailCore at about 12 minutes in software rendering) are
 // left to the nightly run: the per-release run passes --no-heavy.
+// --base URL checks a running copy of the site (for example the Worker in front of dutchmancad.xyz) instead of serving this checkout; the .wasm then
+// comes from whatever that site serves.
 // Needs playwright-core (PLAYWRIGHT_MODULE=/path/to/playwright-core/index.mjs, or resolvable) and
 // Chromium (CHROME=/path/to/chrome, or Playwright's own). Serves the repository itself on a free port.
 import http from 'node:http';
@@ -59,7 +61,8 @@ const server = http.createServer((req, res) => {
   fs.createReadStream(p).pipe(res);
 });
 await new Promise(r => server.listen(0, '127.0.0.1', r));
-const base = `http://127.0.0.1:${server.address().port}`;
+const base = arg('--base', '') || `http://127.0.0.1:${server.address().port}`;
+const external = !!arg('--base', '');
 
 const spec = process.env.PLAYWRIGHT_MODULE ? pathToFileURL(process.env.PLAYWRIGHT_MODULE).href : 'playwright-core';
 const { chromium } = await import(spec);
@@ -84,7 +87,7 @@ for (const e of entries) {
   page.on('response', r => { if (r.status() === 404) problems.push('404: ' + r.url()); });
   page.on('response', r => { if (r.url().endsWith(e.design.replace(/^.*\//, ''))) designOk = r.ok(); });
   // The .wasm is not in git: without a local copy, take it from the release asset the manifest names.
-  await page.route('**/demo/app/*.wasm', async route => {
+  if (!external) await page.route('**/demo/app/*.wasm', async route => {
     const local = path.join(root, 'demo/app', path.basename(new URL(route.request().url()).pathname));
     if (fs.existsSync(local)) return route.fallback();
     const a = JSON.parse(fs.readFileSync(path.join(root, 'demo/app/wasm-asset.json'), 'utf8'));
