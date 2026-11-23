@@ -1,0 +1,3 @@
+# Too big for git: kept as a release asset (see demo/app/wasm-asset.json)
+demo/app/*.wasm
+__pycache__/

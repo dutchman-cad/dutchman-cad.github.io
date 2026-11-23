@@ -16,8 +16,9 @@
 <div class="actions"><a id="open" class="cta" target="_blank" rel="noopener">Get SolidCraft</a><a id="download" class="cta alt" download>Download the design</a></div>
 <p id="hint" hidden></p>
 </section>
-<p><small>SolidCraft's web app runs entirely in your browser; nothing is uploaded. It needs WebGPU or WebGL2. This page uses SolidCraft 0.28.0's web app.</small></p>
+<p><small>SolidCraft's web app runs entirely in your browser; nothing is uploaded. It needs WebGPU or WebGL2. This page uses <span id="sc-version">SolidCraft</span>'s web app.</small></p>
 <script>
+fetch('app/build.json').then(r => r.json()).then(b => { document.getElementById('sc-version').textContent = 'SolidCraft ' + String(b.version).split('-')[0]; }).catch(() => {});
 const get = id => document.getElementById(id);
 const duration = seconds => {
   if (seconds < 90) return seconds + ' seconds';
@@ -44,7 +45,14 @@ fetch('gallery.json').then(r => { if (!r.ok) throw new Error(); return r.json();
   }
   const designURL = new URL(entry.design, 'https://dutchmancad.xyz/demo/').href;
   get('viewer').title = entry.title + ' in SolidCraft';
-  const load = () => { get('gate').hidden = true; get('still').hidden = true; get('viewer').hidden = false; get('viewer').src = 'app/?embed&open=' + designURL; };
+  // The web app's .wasm is served by the site's Worker from a release asset; until that is live, say so instead of showing a broken viewer.
+  const viewerUp = () => fetch('app/wasm-asset.json').then(r => r.json()).then(a => fetch('app/' + a.file, { method: 'HEAD' }))
+    .then(r => r.ok && /wasm/.test(r.headers.get('content-type') || '')).catch(() => false);
+  const load = async () => {
+    get('gate').hidden = true;
+    if (!await viewerUp()) { get('viewer').hidden = true; get('still').src = '../' + entry.thumb; get('still').alt = entry.title; get('still').hidden = false; get('hint').textContent = 'The viewer is updating, try again in a few minutes.'; get('hint').hidden = false; return; }
+    get('still').hidden = true; get('viewer').hidden = false; get('viewer').src = 'app/?embed&open=' + designURL;
+  };
   if (entry.heavy) {
     get('viewer').hidden = true;
     get('still').src = '../' + entry.thumb; get('still').alt = entry.title + ' in SolidCraft'; get('still').hidden = false;

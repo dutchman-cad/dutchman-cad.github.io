@@ -13,3 +13,6 @@ jobs:
         with:
           lfs: false
       - run: python3 scripts/check_gallery.py
+      - run: python3 -m unittest test_solidcraft_current
+        working-directory: scripts
+      - run: cd .worker && npm test
