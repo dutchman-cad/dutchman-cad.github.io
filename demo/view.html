@@ -16,8 +16,9 @@
 <div class="actions"><a id="open" class="cta" target="_blank" rel="noopener">Get SolidCraft</a><a id="download" class="cta alt" download>Download the design</a></div>
 <p id="hint" hidden></p>
 </section>
-<p><small>SolidCraft's web app runs entirely in your browser; nothing is uploaded. It needs WebGPU or WebGL2. This page uses SolidCraft 0.28.0's web app.</small></p>
+<p><small>SolidCraft's web app runs entirely in your browser; nothing is uploaded. It needs WebGPU or WebGL2. This page uses <span id="sc-version">SolidCraft</span>'s web app.</small></p>
 <script>
+fetch('app/build.json').then(r => r.json()).then(b => { document.getElementById('sc-version').textContent = 'SolidCraft ' + String(b.version).split('-')[0]; }).catch(() => {});
 const get = id => document.getElementById(id);
 const duration = seconds => {
   if (seconds < 90) return seconds + ' seconds';

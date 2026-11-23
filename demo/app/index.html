@@ -9,7 +9,7 @@
   <meta property="og:site_name" content="SolidCraft">
   <meta property="og:title" content="SolidCraft: try it in your browser">
   <meta property="og:description" content="Open-source parametric CAD built in Rust. Desktop, browser, and MCP for AI agents.">
-  <meta property="og:url" content="https://solidcraft.ai/">
+  <meta property="og:url" content="https://app.solidcraft.io/">
   <meta property="og:image" content="https://docs.solidcraft.io/og.png">
   <meta property="og:image:width" content="1280">
   <meta property="og:image:height" content="640">
@@ -21,8 +21,8 @@
   <meta name="twitter:image:alt" content="SolidCraft: open-source parametric CAD built in Rust">
   
 <script type="module">
-import init, * as bindings from './solidcraft-web-b517fa56d6287dbf.js';
-const wasm = await init({ module_or_path: './solidcraft-web-b517fa56d6287dbf_bg.wasm' });
+import init, * as bindings from './solidcraft-web-ce7b01c2b596cba0.js';
+const wasm = await init({ module_or_path: './solidcraft-web-ce7b01c2b596cba0_bg.wasm' });
 
 
 window.wasmBindings = bindings;
@@ -31,6 +31,17 @@ window.wasmBindings = bindings;
 dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
 
 </script>
+  
+  
+  
+  
+  
+  
+  
+  
+  <!-- A drawing's Arabic, Korean and Chinese text: each fetched once, when a drawing needs it. -->
+  
+  
   
   
   
@@ -48,7 +59,8 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
   
   
   
-<link rel="modulepreload" href="./solidcraft-web-b517fa56d6287dbf.js" crossorigin="anonymous" integrity="sha384-FU8XmWjSUxVqkZDT2hD+qYKWoLKDMdBLbasisapuAb9HN/H565rnnl3U6eehNCoC"><link rel="preload" href="./solidcraft-web-b517fa56d6287dbf_bg.wasm" crossorigin="anonymous" integrity="sha384-cbpBYCJiPIgk2RJilpl8hwCbBfvdkxWf80jWyNvg782kc3vCtPnyAXJWkwOkxcJE" as="fetch" type="application/wasm"></head>
+  
+<link rel="modulepreload" href="./solidcraft-web-ce7b01c2b596cba0.js" crossorigin="anonymous" integrity="sha384-I5kZKimTCisWjBGZy7O76g5ltopvdUGNCvaSFWRJXhlGIjV72LZ6bz3PsQ/Nn5nn"><link rel="preload" href="./solidcraft-web-ce7b01c2b596cba0_bg.wasm" crossorigin="anonymous" integrity="sha384-65rXSq2BJK9vcWebj1Zl+NSD+7I8PX4m4kYZIbJzlJYQ1rKiuZm0czEFdj0G1l7E" as="fetch" type="application/wasm"></head>
 <body>
   <canvas id="solidcraft_canvas"></canvas>
   <div id="solidcraft_loading" role="status"><img src="loading-logo.svg" alt=""><span class="sr-only">Loading SolidCraft&hellip;</span></div>

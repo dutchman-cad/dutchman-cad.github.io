@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import worker, { route, REPO, PAGES } from "../router.js";
+import worker, { route, REPO, PAGES, PAGES_REPO } from "../router.js";
 const A = "https://dutchmancad.xyz";
 const r = (p) => route(A + p);
 test("GitHub repo routes mirror github.com/dutchman-cad/dutchman with path and query", () => {
@@ -61,5 +61,28 @@ test("fetch: 301 with Location; proxy rewrites Pages redirects back to the apex 
     assert.equal(n.status, 404); assert.equal(await n.text(), "nf"); assert.equal(n.headers.get("x-github-request-id"), null);
     const post = await worker.fetch(new Request(A + "/", { method: "POST" }));
     assert.equal(post.status, 405);
+  } finally { globalThis.fetch = orig; }
+});
+
+test("the web app's wasm is served from the release asset the manifest names", async () => {
+  assert.deepEqual(r("/demo/app/solidcraft-web-abc_bg.wasm"), { wasm: "solidcraft-web-abc_bg.wasm" });
+  assert.deepEqual(r("/demo/app/x/y.wasm"), { proxy: `${PAGES}/demo/app/x/y.wasm` });
+  const asset = `${PAGES_REPO}/releases/download/web-0.46.2/solidcraft-web-abc_bg.wasm`;
+  const orig = globalThis.fetch;
+  try {
+    globalThis.fetch = async (url) => {
+      const u = String(url);
+      if (u.startsWith(`${PAGES}/demo/app/wasm-asset.json`)) return new Response(JSON.stringify({ file: "solidcraft-web-abc_bg.wasm", url: asset }));
+      if (u === asset) return new Response("wasm-bytes", { headers: { "content-length": "10" } });
+      return new Response("no", { status: 404 });
+    };
+    const ok = await worker.fetch(new Request(A + "/demo/app/solidcraft-web-abc_bg.wasm"));
+    assert.equal(ok.status, 200);
+    assert.equal(ok.headers.get("content-type"), "application/wasm");
+    assert.match(ok.headers.get("cache-control"), /immutable/);
+    assert.equal(ok.headers.get("x-site-worker"), "2");
+    assert.equal(await ok.text(), "wasm-bytes");
+    const other = await worker.fetch(new Request(A + "/demo/app/other_bg.wasm"));
+    assert.equal(other.status, 404);
   } finally { globalThis.fetch = orig; }
 });
