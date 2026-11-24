@@ -135,7 +135,7 @@ jobs:
       - name: Open the demo designs on the live site
         run: |
           set -o pipefail
-          node scripts/check_demo_load.mjs --base https://dutchmancad.xyz --no-heavy --out "$RUNNER_TEMP/shots" 2>&1 | tee "$RUNNER_TEMP/live.log"
+          node scripts/check_demo_load.mjs --base https://dutchmancad.xyz --no-heavy --wait 300 --out "$RUNNER_TEMP/shots" 2>&1 | tee "$RUNNER_TEMP/live.log"
           { echo '### Live site'; echo '```'; cat "$RUNNER_TEMP/live.log"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@v4
         if: always()
