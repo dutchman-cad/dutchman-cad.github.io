@@ -94,6 +94,7 @@ jobs:
           path: ${{ runner.temp }}/shots
   nightly:
     # The heavy designs (RailCore, about 12 minutes in software rendering) open once a night on the demo as merged.
+    # --wait 180 allows 8 x 180 s = 24 minutes per heavy design.
     if: github.event.schedule == '43 3 * * *'
     runs-on: ubuntu-latest
     timeout-minutes: 60
@@ -110,7 +111,7 @@ jobs:
       - name: Open the heavy designs
         run: |
           set -o pipefail
-          node scripts/check_demo_load.mjs --heavy-only --out "$RUNNER_TEMP/shots" 2>&1 | tee "$RUNNER_TEMP/heavy.log"
+          node scripts/check_demo_load.mjs --heavy-only --wait 180 --out "$RUNNER_TEMP/shots" 2>&1 | tee "$RUNNER_TEMP/heavy.log"
           { echo '### Heavy designs'; echo '```'; cat "$RUNNER_TEMP/heavy.log"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@v4
         if: always()
