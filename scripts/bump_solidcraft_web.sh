@@ -12,6 +12,12 @@ cd "$(dirname "$0")/.."
 marked=$(gh api "repos/tangency-labs/solidcraft/releases/latest" --jq .tag_name 2>/dev/null || true)
 latest=$(gh api "repos/tangency-labs/solidcraft/releases?per_page=30" | python3 scripts/solidcraft_current.py $marked)
 [ -n "$latest" ] || { echo "no promoted SolidCraft release found" >&2; exit 1; }
+# demo/solidcraft-hold.json lists releases the demo must not take (a broken web app); the demo
+# stays on its current version until a release outside that list is current.
+if python3 -c 'import json,sys; sys.exit(0 if sys.argv[1] in json.load(open("demo/solidcraft-hold.json")).get("skip", []) else 1)' "$latest" 2>/dev/null; then
+  echo "SolidCraft $latest is held (demo/solidcraft-hold.json); the demo stays where it is" >&2
+  exit 0
+fi
 current=${FAKE_CURRENT:-$(python3 -c "import json;print(json.load(open('demo/app/build.json'))['version'].split('-')[0])")}
 newest=$(printf '%s\n%s\n' "$current" "$latest" | sort -V | tail -1)
 # FAKE_CURRENT (a test run) pretends the demo is on that older version.
