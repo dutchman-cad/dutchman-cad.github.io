@@ -7,8 +7,10 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 # The current release, by the rule in scripts/solidcraft_current.py: the newest unflagged release's notes
-# may say "X stays the current release"; a prerelease-flagged release is skipped.
-latest=$(gh api "repos/tangency-labs/solidcraft/releases?per_page=30" | python3 scripts/solidcraft_current.py)
+# may say "X stays the current release"; a prerelease-flagged release is skipped; a newer release
+# GitHub marks Latest wins (an announced release is current). A failed Latest lookup falls back to the notes.
+marked=$(gh api "repos/tangency-labs/solidcraft/releases/latest" --jq .tag_name 2>/dev/null || true)
+latest=$(gh api "repos/tangency-labs/solidcraft/releases?per_page=30" | python3 scripts/solidcraft_current.py $marked)
 [ -n "$latest" ] || { echo "no promoted SolidCraft release found" >&2; exit 1; }
 current=${FAKE_CURRENT:-$(python3 -c "import json;print(json.load(open('demo/app/build.json'))['version'].split('-')[0])")}
 newest=$(printf '%s\n%s\n' "$current" "$latest" | sort -V | tail -1)
