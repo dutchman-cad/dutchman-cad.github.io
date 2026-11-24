@@ -11,6 +11,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import zlib from 'node:zlib';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+import crypto from 'node:crypto';
+import { Readable } from 'node:stream';
+import { pipeline } from 'node:stream/promises';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const arg = (n, d) => { const i = process.argv.indexOf(n); return i > 0 ? process.argv[i + 1] : d; };
@@ -63,6 +66,23 @@ const server = http.createServer((req, res) => {
 await new Promise(r => server.listen(0, '127.0.0.1', r));
 const base = arg('--base', '') || `http://127.0.0.1:${server.address().port}`;
 const external = !!arg('--base', '');
+const liveSite = external && new URL(base).hostname === 'dutchmancad.xyz';
+// The .wasm (over 200 MB) is not in git. Download the release asset the manifest names to disk
+// once, checking its SHA-256, so the local server streams it: passing it through Playwright's
+// route.fetch buffered the whole file and the page died.
+if (!external) {
+  const a = JSON.parse(fs.readFileSync(path.join(root, 'demo/app/wasm-asset.json'), 'utf8'));
+  const local = path.join(root, 'demo/app', a.file);
+  const sha = f => crypto.createHash('sha256').update(fs.readFileSync(f)).digest('hex');
+  if (!fs.existsSync(local) || sha(local) !== a.sha256) {
+    const r = await fetch(a.url);
+    if (!r.ok) throw new Error(`could not download ${a.url}: ${r.status}`);
+    const tmp = local + '.part';
+    await pipeline(Readable.fromWeb(r.body), fs.createWriteStream(tmp));
+    if (sha(tmp) !== a.sha256) { fs.rmSync(tmp); throw new Error(`${a.file}: SHA-256 differs from wasm-asset.json`); }
+    fs.renameSync(tmp, local);
+  }
+}
 
 const spec = process.env.PLAYWRIGHT_MODULE ? pathToFileURL(process.env.PLAYWRIGHT_MODULE).href : 'playwright-core';
 const { chromium } = await import(spec);
@@ -83,19 +103,19 @@ for (const e of entries) {
   const problems = [];
   let designOk = false;
   page.on('pageerror', x => problems.push('page error: ' + String(x).slice(0, 200)));
-  page.on('console', m => { if (m.type() === 'error' && !/status of 404/.test(m.text())) problems.push('console error: ' + m.text().slice(0, 200)); });
+  // "Failed to load resource" names no URL; failed requests are judged by URL below instead, so a
+  // third-party beacon a network blocks (Cloudflare's analytics) is not a failure of the demo.
+  page.on('console', m => { if (m.type() === 'error' && !/status of 404|Failed to load resource/.test(m.text())) problems.push('console error: ' + m.text().slice(0, 200)); });
+  page.on('requestfailed', r => {
+    const u = new URL(r.url()), why = (r.failure() && r.failure().errorText) || '';
+    const firstParty = u.hostname === 'dutchmancad.xyz' || r.url().startsWith(base);
+    if (firstParty && why !== 'net::ERR_ABORTED') problems.push(`request failed: ${u.pathname} (${why})`);
+  });
   page.on('response', r => { if (r.status() === 404) problems.push('404: ' + r.url()); });
   page.on('response', r => { if (r.url().endsWith(e.design.replace(/^.*\//, ''))) designOk = r.ok(); });
-  // The .wasm is not in git: without a local copy, take it from the release asset the manifest names.
-  if (!external) await page.route('**/demo/app/*.wasm', async route => {
-    const local = path.join(root, 'demo/app', path.basename(new URL(route.request().url()).pathname));
-    if (fs.existsSync(local)) return route.fallback();
-    const a = JSON.parse(fs.readFileSync(path.join(root, 'demo/app/wasm-asset.json'), 'utf8'));
-    const r = await route.fetch({ url: a.url, timeout: 0 });
-    await route.fulfill({ response: r, contentType: 'application/wasm' });
-  });
   // The viewer page asks for the design at its production address; serve it from this checkout.
-  await page.route('https://dutchmancad.xyz/**', async route => {
+  // (Checking the live site itself needs no rerouting.)
+  if (!liveSite) await page.route('https://dutchmancad.xyz/**', async route => {
     const r = await route.fetch({ url: base + new URL(route.request().url()).pathname });
     await route.fulfill({ response: r });
   });
