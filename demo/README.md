@@ -49,3 +49,7 @@ All converted with Dutchman Convert 0.2.5 for SolidCraft 0.27.
 - Robot arm: Fusion assembly from [Adriaeik/fusion2URDF](https://github.com/Adriaeik/fusion2URDF) (`examples/Assem1_description/Assem1.f3z`), MIT; 41 parts and 39 joints.
 - RailCore II 300ZL: Fusion assembly from [railcore/parts](https://github.com/railcore/parts), by J. Steve White and Tony Akens, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). 379 of 379 parts placed; 153 of 416 features editable. The entry credits the authors, links the source and licence, and says what changed (converted to SolidCraft; the design is unchanged).
 - Voron 2.4r2: Fusion assembly from [VoronDesign/Voron-2](https://github.com/VoronDesign/Voron-2), by Voron Design, [GPL-3.0](https://www.gnu.org/licenses/gpl-3.0.html). 1,683 of 1,683 parts placed, each body in its own colour. The converted file is a GPL-3.0 derivative; it is too large for the browser viewer, so it goes up as a release asset (download only). Not affiliated with Voron Design.
+
+## Holding a broken release
+
+List a SolidCraft version in `demo/solidcraft-hold.json` (`skip`) to keep the automatic bump from taking it, for example when its web app is broken. The demo stays on its current version until a release outside that list is current. Remove the entry once a fixed release is out.

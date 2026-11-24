@@ -1,0 +1,4 @@
+{
+  "skip": ["0.48.0", "0.48.1"],
+  "reason": "SolidCraft 0.48 web app shows a blank screen (wasm32 Instant panic, https://github.com/tangency-labs/solidcraft/issues/21584); keep the demo on its working version until a fixed release."
+}
