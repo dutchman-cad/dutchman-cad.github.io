@@ -9,13 +9,18 @@ on:
         description: 'Test run: pretend the demo is on this SolidCraft version (for example 0.45.0)'
         required: false
         default: ''
+      live:
+        description: 'Only check the live site: open every demo design through https://dutchmancad.xyz (its Worker and .wasm), change nothing'
+        type: boolean
+        required: false
+        default: false
 permissions:
   contents: write
   pull-requests: write
 concurrency: solidcraft-demo
 jobs:
   bump:
-    if: github.event.schedule != '43 3 * * *'
+    if: github.event.schedule != '43 3 * * *' && !inputs.live
     runs-on: ubuntu-latest
     env:
       GH_TOKEN: ${{ github.token }}
@@ -111,4 +116,29 @@ jobs:
         if: always()
         with:
           name: demo-heavy-shots
+          path: ${{ runner.temp }}/shots
+  live:
+    # On request: the same load check against the deployed site, through its Worker, instead of this checkout.
+    if: github.event_name == 'workflow_dispatch' && inputs.live
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          lfs: false
+      - name: Install a browser
+        run: |
+          mkdir -p "$RUNNER_TEMP/pw" && cd "$RUNNER_TEMP/pw"
+          npm install --no-save playwright-core
+          npx playwright-core install --with-deps chromium
+          echo "PLAYWRIGHT_MODULE=$RUNNER_TEMP/pw/node_modules/playwright-core/index.mjs" >> "$GITHUB_ENV"
+      - name: Open the demo designs on the live site
+        run: |
+          set -o pipefail
+          node scripts/check_demo_load.mjs --base https://dutchmancad.xyz --no-heavy --out "$RUNNER_TEMP/shots" 2>&1 | tee "$RUNNER_TEMP/live.log"
+          { echo '### Live site'; echo '```'; cat "$RUNNER_TEMP/live.log"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: demo-live-shots
           path: ${{ runner.temp }}/shots
