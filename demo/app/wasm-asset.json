@@ -1,7 +1,7 @@
 {
- "file": "solidcraft-web-dc53978f4ef6f4f9_bg.wasm",
- "version": "0.49.0",
- "sha256": "ad59f8bd5bf162b82e60e8df1d7eb499be969b2b06d938878464a5ef375675f0",
- "size": 209059891,
- "url": "https://github.com/dutchman-cad/dutchman-cad.github.io/releases/download/web-0.49.0/solidcraft-web-dc53978f4ef6f4f9_bg.wasm"
+ "file": "solidcraft-web-1bda44fbcb500f5b_bg.wasm",
+ "version": "0.49.1",
+ "sha256": "12cc4ebbbea2dc2e77e2c5bf2caafc5908f784d3da9d0df178651212a0ec1405",
+ "size": 212935669,
+ "url": "https://github.com/dutchman-cad/dutchman-cad.github.io/releases/download/web-0.49.1/solidcraft-web-1bda44fbcb500f5b_bg.wasm"
 }
