@@ -60,6 +60,7 @@ The source guidance below was checked against Dutchman main at 082ad08a6c24f11d2
 ## Start here
 
 - [Contribution page](https://dutchmancad.xyz/contribute/): Four website levels and a copyable, tier-specific prompt.
+- [Donate page](https://dutchmancad.xyz/donate/): Optional, voluntary support for Ray's work on Dutchman.
 - [Install guide](https://raw.githubusercontent.com/dutchman-cad/dutchman/main/docs/install.md): Desktop apps, release archives, command-line installation and included local guidance.
 - [Latest release](https://github.com/dutchman-cad/dutchman/releases/latest): Stable downloads and release notes.
 - [SolidCraft](https://solidcraft.io): The product in which to open and check converted designs.

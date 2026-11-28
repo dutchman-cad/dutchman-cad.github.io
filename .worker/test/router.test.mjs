@@ -38,7 +38,7 @@ test("www goes to the apex, same path and query", () => {
   assert.deepEqual(route("https://www.dutchmancad.xyz/"), { redirect: "https://dutchmancad.xyz/" });
 });
 test("site pages proxy to GitHub Pages", () => {
-  for (const p of ["/", "/contribute/", "/contribute", "/demo/", "/og.png", "/favicon.ico", "/favicon.svg", "/favicon-32.png", "/apple-touch-icon.png", "/llms.txt", "/view.html", "/report-policy.json",
+  for (const p of ["/", "/contribute/", "/contribute", "/donate/", "/donate", "/demo/", "/og.png", "/favicon.ico", "/favicon.svg", "/favicon-32.png", "/apple-touch-icon.png", "/llms.txt", "/view.html", "/report-policy.json",
     "/assets/x.css", "/nope", "/githubx", "/downloads"])
     assert.deepEqual(r(p), { proxy: PAGES + p }, p);
   assert.deepEqual(r("/view.html?f=1"), { proxy: `${PAGES}/view.html?f=1` });
