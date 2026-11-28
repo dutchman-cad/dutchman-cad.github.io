@@ -48,12 +48,16 @@ function decodePng(buf) {
 // toast) shows lit model faces: an empty scene is only the dark grid and the origin planes.
 function modelVisible(png) {
   const { w, h, bpp, px } = decodePng(png);
-  let lit = 0, total = 0;
+  let lit = 0, chroma = 0, total = 0;
   for (let y = Math.floor(h * 0.12); y < h * 0.82; y += 2) for (let x = Math.floor(w * 0.3); x < w * 0.8; x += 2) {
     const i = (y * w + x) * bpp; total++;
     if (0.3 * px[i] + 0.6 * px[i + 1] + 0.1 * px[i + 2] > 150) lit++;
+    // A saturated colour (a green part) counts too: SolidCraft 0.51 shades the same parts darker, so
+    // the robot arm's green no longer reaches the brightness above. An empty scene has about 0.2 % of
+    // such pixels (the origin planes), an open design 2 % or more.
+    if (Math.max(px[i], px[i + 1], px[i + 2]) - Math.min(px[i], px[i + 1], px[i + 2]) > 100) chroma++;
   }
-  return lit / total > 0.004;
+  return lit / total > 0.004 || chroma / total > 0.01;
 }
 
 const server = http.createServer((req, res) => {
