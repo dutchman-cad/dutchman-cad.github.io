@@ -1,6 +1,6 @@
 # Converted design gallery
 
-Serve the repository with a static HTTP server (for example, `python3 -m http.server 8000`) and open `/demo/`. No build step, external scripts, or fonts are needed. `gallery.json` is the single entry list for both the gallery and viewer. The SolidCraft web build lives in `app/`: SolidCraft 0.51.1's `solidcraft-web-0.51.1.zip` release asset (the pages read the version from `app/build.json`), unpacked as is, with its licence and notice files. Gallery updates do not require editing it.
+Serve the repository with a static HTTP server (for example, `python3 -m http.server 8000`) and open `/demo/`. No build step, external scripts, or fonts are needed. `gallery.json` is the single entry list for both the gallery and viewer. The SolidCraft web build lives in `app/`: SolidCraft 0.51.2's `solidcraft-web-0.51.2.zip` release asset (the pages read the version from `app/build.json`), unpacked as is, with its licence and notice files. Gallery updates do not require editing it.
 
 ## Add a design
 
